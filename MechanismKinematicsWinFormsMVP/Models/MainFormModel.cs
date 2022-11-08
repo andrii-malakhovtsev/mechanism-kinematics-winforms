@@ -5,15 +5,19 @@ namespace MechanismKinematicsWinFormsMVP
 {
     public class MainFormModel
     {
-        private readonly MechanismController _mechanismController;
         private static readonly double s_frameInterval = 0.1;
+        private readonly MechanismController _mechanismController;
         public Point Center { get; set; }
+        public Graphics Graphics { get; set; } = null;
         public int RadiusOne { get; set; } = 80; // by default
         public int RadiusTwo { get; set; } = 120;
         public int TimerInterval { get; set; } = 20;
+        public int ClientSizeHeight { get; set; }
+        public int ClientSizeWidth { get; set; }
+        public int PanelHeight { get; set; }
+        public int MenuStripHeight { get; set; }
         public double Omega { get; set; } = 0.5;
         public double Time { get; set; } = 0;
-        public Graphics Graphics { get; set; } = null;
         public bool MechanismDrawn { get; set; } = false;
         public bool TimerEnabled { get; set; } = true;
         public bool ClearToolStripEnabled { get; set; } = false;
@@ -24,10 +28,6 @@ namespace MechanismKinematicsWinFormsMVP
         public bool PointBEnabled { get; set; } = false;
         public bool GeometricToolStripEnabled { get; set; }
         public bool KinematicToolStripEnabled { get; set; }
-        public int ClientSizeHeight { get; set; }
-        public int ClientSizeWidth { get; set; }
-        public int PanelHeight { get; set; }
-        public int MenuStripHeight { get; set; }
         public bool PointAChecked { get; set; }
         public bool PointBChecked { get; set; }
 
@@ -58,12 +58,12 @@ namespace MechanismKinematicsWinFormsMVP
 
         public string GetLabelRadiusOneText()
         {
-            return GetLabelRadiusText(true);
+            return GetLabelRadiusText(isRadiusOne: true) ;
         }
 
         public string GetLabelRadiusTwoText()
         {
-            return GetLabelRadiusText(false);
+            return GetLabelRadiusText(isRadiusOne: false);
         }
 
         private string GetLabelRadiusText(bool isRadiusOne)
@@ -89,9 +89,9 @@ namespace MechanismKinematicsWinFormsMVP
         public void TimerTick()
         {
             _mechanismController.RefreshFields();
-            _mechanismController.RefreshPicture(false, false);
+            _mechanismController.RefreshPicture(clear: false, clearStable: false);
             Time += s_frameInterval;
-            _mechanismController.RefreshPicture(true, false);
+            _mechanismController.RefreshPicture(clear: true, clearStable: false);
             _mechanismController.CountTrajectory();
         }
 
@@ -109,7 +109,8 @@ namespace MechanismKinematicsWinFormsMVP
 
         public void PictureBoxPaint()
         {
-            if (MechanismDrawn) _mechanismController.RefreshPicture(true, false);
+            if (MechanismDrawn) 
+                _mechanismController.RefreshPicture(clear: true, clearStable: false);
         }
 
         public void DrawMechanismAfterForm()
@@ -120,17 +121,17 @@ namespace MechanismKinematicsWinFormsMVP
         public void DrawMechanism()
         {
             ResetTime();
-            _mechanismController.RefreshPicture(true, false);
-            SetPictureMechanismEnables(true);
+            _mechanismController.RefreshPicture(clear: true, clearStable: false);
+            SetPictureMechanismEnables(draw: true);
             MechanismDrawn = true;
             _mechanismController.ClearPointsLists();
         }
 
         public void ClearMechanism()
         {
-            _mechanismController.RefreshPicture(false, true);
+            _mechanismController.RefreshPicture(clear: false, clearStable: true);
             _mechanismController.ClearDrawing();
-            SetPictureMechanismEnables(false);
+            SetPictureMechanismEnables(draw: false);
         }
 
         private void SetPictureMechanismEnables(bool draw)
@@ -145,13 +146,13 @@ namespace MechanismKinematicsWinFormsMVP
 
         public void StopMechanismAnimation()
         {
-            SetMechanismAnimationEnables(false);
+            SetMechanismAnimationEnables(startPictureAnimation: false);
         }
 
         public void StartMechanismAnimation()
         {
             _mechanismController.ClearDrawing();
-            SetMechanismAnimationEnables(true);
+            SetMechanismAnimationEnables(startPictureAnimation: true);
             _mechanismController.AddPointsToLists();
         }
 

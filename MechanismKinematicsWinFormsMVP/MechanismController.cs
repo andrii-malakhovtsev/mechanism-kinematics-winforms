@@ -7,16 +7,16 @@ namespace MechanismKinematicsWinFormsMVP
 {
     public class MechanismController
     {
-        private static readonly int s_heightIndent = 10;
+        private const int s_heightIndent = 10;
         private readonly MainFormModel _mainFormModel;
-        private Pen _pen;
-        private Point _shadingPointOne = new Point();
-        private Point _shadingPointTwo = new Point();
-        private Point _center;
-        private Rectangle _rectangle;
         private Graphics _graphics;
         private List<Point> _pointAList = null;
         private List<Point> _pointBList = null;
+        private Point _shadingPointOne = new Point();
+        private Point _shadingPointTwo = new Point();
+        private Point _center;
+        private Pen _pen;
+        private Rectangle _rectangle;
         private double _rotationAngle;
         private double _xCircleCoordianate;
         private double _yCircleCoordianate;
@@ -69,7 +69,7 @@ namespace MechanismKinematicsWinFormsMVP
         public void PointCheck()
         {
             ClearDrawing();
-            RefreshPicture(true, false);
+            RefreshPicture(clear: true, clearStable: false);
             CountTrajectory();
         }
 
@@ -99,7 +99,7 @@ namespace MechanismKinematicsWinFormsMVP
 
             RefreshWheelOne(clearStable);
             RefreshRotationAngle();
-            SetPointsCoordinates(true);
+            SetPointsCoordinates(byDefault: true);
             RefreshWheelOneShading(clear);
             RefreshBearing();
             RefreshBearingLines();
@@ -126,8 +126,8 @@ namespace MechanismKinematicsWinFormsMVP
         {
             RefreshRotationAngle();
             Point point = new Point();
-            _xCircleCoordianate = OnCircleCoordinate(true, radius);
-            _yCircleCoordianate = OnCircleCoordinate(false, radius);
+            _xCircleCoordianate = OnCircleCoordinate(xAxis: true, radius);
+            _yCircleCoordianate = OnCircleCoordinate(xAxis: false, radius);
             SetPointCoordinates(ref point);
             return point;
         }
@@ -151,7 +151,7 @@ namespace MechanismKinematicsWinFormsMVP
             _pen.Color = clear ? Color.Black : Color.White;
             _pen.DashStyle = DashStyle.DashDot;
             _graphics.DrawLine(_pen, _shadingPointOne, _shadingPointTwo);
-            SetPointsCoordinates(false);
+            SetPointsCoordinates(byDefault: false);
         }
 
         private void RefreshBearing()
@@ -208,9 +208,9 @@ namespace MechanismKinematicsWinFormsMVP
         {
             _pen.Color = clear ? Color.Black : Color.White;
             _pen.DashStyle = DashStyle.DashDot;
-            SetPointsCoordinates(true);
+            SetPointsCoordinates(byDefault: true);
             _graphics.DrawLine(_pen, _shadingPointOne, _shadingPointTwo);
-            SetPointsCoordinates(false);
+            SetPointsCoordinates(byDefault: false);
             _graphics.DrawLine(_pen, _shadingPointOne, _shadingPointTwo);
         }
 
@@ -218,7 +218,7 @@ namespace MechanismKinematicsWinFormsMVP
         {
             _xCircleCoordianate = -OnCircleCoordinate(byDefault, _radiusTwo);
             _yCircleCoordianate = OnCircleCoordinate(!byDefault, _radiusTwo);
-            SignByBoolean(ref _yCircleCoordianate, byDefault, true);
+            SignByBoolean(ref _yCircleCoordianate, byDefault, inverse: true);
             SetPointCoordinates(ref _shadingPointOne);
             _xCircleCoordianate *= -1; _yCircleCoordianate *= -1;
             SetPointCoordinates(ref _shadingPointTwo);
@@ -243,12 +243,12 @@ namespace MechanismKinematicsWinFormsMVP
 
         private void RefreshWeightOne()
         {
-            RefreshWeight(true);
+            RefreshWeight(isRadiusOne: true);
         }
 
         private void RefreshWeightTwo()
         {
-            RefreshWeight(false);
+            RefreshWeight(isRadiusOne: false);
         }
 
         private void DrawWeightLine(int radius, int weightLowestPossiblePoint)
@@ -279,7 +279,7 @@ namespace MechanismKinematicsWinFormsMVP
 
             bool omegaPositive = _omega > 0;
 
-            SignByBoolean(ref linearDistance, isRadiusOne, true);
+            SignByBoolean(ref linearDistance, isRadiusOne, inverse: true);
             radius *= isRadiusOne ? 1 : -1;
 
             int weightHorizotnalDistance = _center.X + radius - 8;
@@ -288,7 +288,7 @@ namespace MechanismKinematicsWinFormsMVP
             if (WeightLowestHeightDelta(weightLowestHeight, linearDistance) > _center.Y)
             {
                 linearDistance = Math.Abs(linearDistance);
-                SignByBoolean(ref linearDistance, omegaPositive, false);
+                SignByBoolean(ref linearDistance, omegaPositive, inverse: false);
                 int weightLowestHeightDelta = WeightLowestHeightDelta(weightLowestHeight, linearDistance);
 
                 bool weightWithinWheel = isRadiusOne ?
@@ -297,7 +297,7 @@ namespace MechanismKinematicsWinFormsMVP
 
                 if (weightWithinWheel)
                 {
-                    SignByBoolean(ref linearDistance, isRadiusOne, true);
+                    SignByBoolean(ref linearDistance, isRadiusOne, inverse: true);
                     weightLowestHeightDelta = WeightLowestHeightDelta(weightLowestHeight, linearDistance);
                     SetWeightParameters(radius, weightLowestHeightDelta, weightHorizotnalDistance);
                 }

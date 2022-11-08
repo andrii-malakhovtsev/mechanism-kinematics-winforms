@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -9,30 +8,30 @@ namespace MechanismKinematicsWinFormsMVP
     {
         #region Interface implementation
 
+        public Graphics Graphics { get; set; }
         public Point Center { get; set; }
-        public int RadiusOne { get; set; }
-        public int RadiusTwo { get; set; }
+        public Point PictureBoxLocation { get; set; }
         public double Omega { get; set; }
         public double Time { get; set; }
-        public Graphics Graphics { get; set; }
-        public bool Drawn { get; set; }
-        public Point PictureBoxLocation { get; set; }
+        public int RadiusOne { get; set; }
+        public int RadiusTwo { get; set; }
         public int PictureBoxWidth { get; set; }
         public int PictureBoxHeight { get; set; }
+        public int ClientSizeHeight { get; set; }
+        public int ClientSizeWidth { get; set; }
+        public int PanelHeight { get; set; }
+        public int MenuStripHeight { get; set; }
+        public int TimerInterval { get; set; }
         public string LabelRadiusOneText { get; set; }
         public string LabelRadiusTwoText { get; set; }
         public string LabelOmegaText { get; set; }
-        public int TimerInterval { get; set; }
+        public bool Drawn { get; set; }
         public bool ClearToolStripEnabled { get; set; }
         public bool StartToolStripEnabled { get; set; }
         public bool StopToolStripEnabled { get; set; }
         public bool DrawToolStripEnabled { get; set; }
         public bool KinematicToolStripEnabled { get; set; }
         public bool GeometricToolStripEnabled { get; set; }
-        public int ClientSizeHeight { get; set; }
-        public int ClientSizeWidth { get; set; }
-        public int PanelHeight { get; set; }
-        public int MenuStripHeight { get; set; }
         public bool TimerEnabled { get; set; }
         public bool PointAChecked { get; set; }
         public bool PointBChecked { get; set; }
