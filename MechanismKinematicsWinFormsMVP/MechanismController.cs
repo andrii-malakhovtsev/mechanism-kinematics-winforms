@@ -7,7 +7,7 @@ namespace MechanismKinematicsWinFormsMVP
 {
     public class MechanismController
     {
-        private const int s_heightIndent = 10;
+        private static readonly int s_heightIndent = 10;
         private readonly MainFormModel _mainFormModel;
         private Graphics _graphics;
         private List<Point> _pointAList = null;
