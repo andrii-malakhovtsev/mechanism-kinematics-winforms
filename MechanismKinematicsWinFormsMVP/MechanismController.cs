@@ -270,7 +270,7 @@ namespace MechanismKinematicsWinFormsMVP
             int weightHeight = isRadiusOne ? 40 : 20,
                       radius = isRadiusOne ? _radiusOne : _radiusTwo,
                 weightLowestHeight = _center.Y + radius + weightHeight,
-                panelHeight = 141, weightHeightSize = 31, weightWidth = 15,
+                panelHeight = 139, weightHeightSize = 31, weightWidth = 15,
                 weightLowestHeightPossible = _mainFormModel.GetPictureBoxHeight() - weightHeightSize,
                 weightCurrentLowestHeight = _mainFormModel.GetPictureBoxHeight() - panelHeight;
 
