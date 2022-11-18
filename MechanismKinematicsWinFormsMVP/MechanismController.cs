@@ -272,7 +272,8 @@ namespace MechanismKinematicsWinFormsMVP
                 weightLowestHeight = _center.Y + radius + weightHeight,
                 panelHeight = 139, weightHeightSize = 31, weightWidth = 15,
                 weightLowestHeightPossible = _mainFormModel.GetPictureBoxHeight() - weightHeightSize,
-                weightCurrentLowestHeight = _mainFormModel.GetPictureBoxHeight() - panelHeight;
+                weightCurrentLowestHeight = _mainFormModel.GetPictureBoxHeight() - panelHeight
+                + (radius - weightHeight * 2) * 2;
 
             double linearSpeed = _omega * radius,
                    linearDistance = linearSpeed * _time;
