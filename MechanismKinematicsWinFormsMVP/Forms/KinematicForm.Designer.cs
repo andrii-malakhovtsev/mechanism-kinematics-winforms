@@ -95,6 +95,8 @@
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.labelAngularVelocity);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "KinematicForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Mechanical angular velocity";

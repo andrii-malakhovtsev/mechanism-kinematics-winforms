@@ -100,7 +100,7 @@
             // 
             this.DrawToolStripMenuItem.Name = "DrawToolStripMenuItem";
             this.DrawToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Insert;
-            this.DrawToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.DrawToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.DrawToolStripMenuItem.Text = "Draw";
             this.DrawToolStripMenuItem.Click += new System.EventHandler(this.DrawToolStripMenuItem_Click);
             // 
@@ -108,7 +108,7 @@
             // 
             this.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem";
             this.ClearToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.ClearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ClearToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.ClearToolStripMenuItem.Text = "Clear";
             this.ClearToolStripMenuItem.Click += new System.EventHandler(this.ClearToolStripMenuItem_Click);
             // 
@@ -125,7 +125,7 @@
             // 
             this.StartToolStripMenuItem.Name = "StartToolStripMenuItem";
             this.StartToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F4;
-            this.StartToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.StartToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.StartToolStripMenuItem.Text = "Start";
             this.StartToolStripMenuItem.Click += new System.EventHandler(this.StartToolStripMenuItem_Click);
             // 
@@ -133,7 +133,7 @@
             // 
             this.StopToolStripMenuItem.Name = "StopToolStripMenuItem";
             this.StopToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.StopToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.StopToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.StopToolStripMenuItem.Text = "Stop";
             this.StopToolStripMenuItem.Click += new System.EventHandler(this.StopToolStripMenuItem_Click);
             // 
@@ -149,14 +149,14 @@
             // GeometricToolStripMenuItem
             // 
             this.GeometricToolStripMenuItem.Name = "GeometricToolStripMenuItem";
-            this.GeometricToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.GeometricToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.GeometricToolStripMenuItem.Text = "Geometric";
             this.GeometricToolStripMenuItem.Click += new System.EventHandler(this.GeometricToolStripMenuItem_Click);
             // 
             // KinematicToolStripMenuItem
             // 
             this.KinematicToolStripMenuItem.Name = "KinematicToolStripMenuItem";
-            this.KinematicToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.KinematicToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.KinematicToolStripMenuItem.Text = "Kinematic";
             this.KinematicToolStripMenuItem.Click += new System.EventHandler(this.KinematicToolStripMenuItem_Click);
             // 
@@ -174,7 +174,7 @@
             this.PointAToolStripMenuItem.Enabled = false;
             this.PointAToolStripMenuItem.Name = "PointAToolStripMenuItem";
             this.PointAToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.PointAToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.PointAToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.PointAToolStripMenuItem.Text = "Point A";
             this.PointAToolStripMenuItem.Click += new System.EventHandler(this.PointAToolStripMenuItem_Click);
             // 
@@ -183,7 +183,7 @@
             this.PointBToolStripMenuItem.Enabled = false;
             this.PointBToolStripMenuItem.Name = "PointBToolStripMenuItem";
             this.PointBToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
-            this.PointBToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.PointBToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.PointBToolStripMenuItem.Text = "Point B";
             this.PointBToolStripMenuItem.Click += new System.EventHandler(this.PointBToolStripMenuItem_Click);
             // 
@@ -315,6 +315,8 @@
             this.Controls.Add(this.menuStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MainMenuStrip = this.menuStrip;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mechanism Kinematics";
