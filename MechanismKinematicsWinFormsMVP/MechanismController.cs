@@ -96,7 +96,6 @@ namespace MechanismKinematicsWinFormsMVP
                  _center.Y + heightIndent,
                  2 * _radiusOne,
                  _radiusOne + s_heightIndent - heightIndent);
-
             RefreshWheelOne(clearStable);
             RefreshRotationAngle();
             SetPointsCoordinates(byDefault: true);
@@ -108,18 +107,15 @@ namespace MechanismKinematicsWinFormsMVP
             RefreshWheelTwoShading(clear);
             RefreshWeightOne();
             RefreshWeightTwo();
-
             _pen.Dispose();
         }
 
         private void DrawTrajectory(bool pointChecked, Color color, List<Point> pointsList)
         {
-            if (pointChecked)
-            {
-                _pen = new Pen(color);
-                Point[] pointArray = pointsList.ToArray();
-                if (_time != 0) _graphics.DrawCurve(_pen, pointArray);
-            }
+            if (!pointChecked) return;
+            _pen = new Pen(color);
+            Point[] pointArray = pointsList.ToArray();
+            if (_time != 0) _graphics.DrawCurve(_pen, pointArray);
         }
 
         private Point TrajectoryPoint(int radius)
@@ -140,7 +136,7 @@ namespace MechanismKinematicsWinFormsMVP
         private void RefreshWheelOne(bool clearStable)
         {
             RefreshFields();
-            _pen.Color = clearStable ? Color.White : Color.Black;
+            SetPenColor(!clearStable);
             _rectangle.Location = new Point(_center.X - _radiusOne, _center.Y - _radiusOne);
             _rectangle.Size = new Size(2 * _radiusOne, 2 * _radiusOne);
             _graphics.DrawEllipse(_pen, _rectangle);
@@ -148,10 +144,15 @@ namespace MechanismKinematicsWinFormsMVP
 
         private void RefreshWheelOneShading(bool clear)
         {
-            _pen.Color = clear ? Color.Black : Color.White;
+            SetPenColor(clear);
             _pen.DashStyle = DashStyle.DashDot;
             _graphics.DrawLine(_pen, _shadingPointOne, _shadingPointTwo);
             SetPointsCoordinates(byDefault: false);
+        }
+
+        private void SetPenColor(bool clear)
+        {
+            _pen.Color = clear ? Color.Black : Color.White;
         }
 
         private void RefreshBearing()
@@ -274,28 +275,21 @@ namespace MechanismKinematicsWinFormsMVP
                 weightLowestHeightPossible = _mainFormModel.GetPictureBoxHeight() - weightHeightSize,
                 weightCurrentLowestHeight = _mainFormModel.GetPictureBoxHeight() - panelHeight
                 + (radius - weightHeight * 2) * 2;
-
             double linearSpeed = _omega * radius,
                    linearDistance = linearSpeed * _time;
-
             bool omegaPositive = _omega > 0;
-
             SignByBoolean(ref linearDistance, isRadiusOne, inverse: true);
             radius *= isRadiusOne ? 1 : -1;
-
             int weightHorizotnalDistance = _center.X + radius - 8;
-
             _pen.DashStyle = DashStyle.Solid;
             if (WeightLowestHeightDelta(weightLowestHeight, linearDistance) > _center.Y)
             {
                 linearDistance = Math.Abs(linearDistance);
                 SignByBoolean(ref linearDistance, omegaPositive, inverse: false);
                 int weightLowestHeightDelta = WeightLowestHeightDelta(weightLowestHeight, linearDistance);
-
                 bool weightWithinWheel = isRadiusOne ?
                     weightLowestHeightDelta > weightCurrentLowestHeight :
                     weightLowestHeightDelta < weightLowestHeightPossible;
-
                 if (weightWithinWheel)
                 {
                     SignByBoolean(ref linearDistance, isRadiusOne, inverse: true);
@@ -305,7 +299,6 @@ namespace MechanismKinematicsWinFormsMVP
                 else SetWeightParameters(radius, weightLowestHeightPossible, weightHorizotnalDistance);
             }
             else _rectangle.Location = new Point(weightHorizotnalDistance, Convert.ToInt32(_center.Y));
-
             _rectangle.Size = new Size(weightWidth, weightWidth * 2);
             _graphics.DrawRectangle(_pen, _rectangle);
         }

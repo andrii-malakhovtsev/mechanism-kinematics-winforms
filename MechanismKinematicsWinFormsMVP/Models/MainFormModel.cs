@@ -9,7 +9,7 @@ namespace MechanismKinematicsWinFormsMVP
         private readonly MechanismController _mechanismController;
         public Point Center { get; set; }
         public Graphics Graphics { get; set; } = null;
-        public int RadiusOne { get; set; } = 80; // by default
+        public int RadiusOne { get; set; } = 80;
         public int RadiusTwo { get; set; } = 120;
         public int TimerInterval { get; set; } = 20;
         public int ClientSizeHeight { get; set; }
