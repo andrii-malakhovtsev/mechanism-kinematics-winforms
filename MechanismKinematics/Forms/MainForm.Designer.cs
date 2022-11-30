@@ -1,4 +1,4 @@
-﻿namespace MechanismKinematicsWinFormsMVP
+﻿namespace MechanismKinematics
 {
     partial class MainForm
     {

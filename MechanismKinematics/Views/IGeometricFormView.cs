@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MechanismKinematicsWinFormsMVP
+namespace MechanismKinematics
 {
     public interface IGeometricFormView
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace MechanismKinematicsWinFormsMVP
+namespace MechanismKinematics
 {
     internal static class Program
     {

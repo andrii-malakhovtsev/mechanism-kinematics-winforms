@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace MechanismKinematicsWinFormsMVP
+namespace MechanismKinematics
 {
     public partial class MainForm : Form, IMainFormView
     {

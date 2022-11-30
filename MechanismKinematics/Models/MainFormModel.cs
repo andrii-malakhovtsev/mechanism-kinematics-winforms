@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace MechanismKinematicsWinFormsMVP
+namespace MechanismKinematics
 {
     public class MainFormModel
     {

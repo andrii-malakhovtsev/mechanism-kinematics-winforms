@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MechanismKinematicsWinFormsMVP.Properties {
+namespace MechanismKinematics.Properties {
     using System;
     
     
