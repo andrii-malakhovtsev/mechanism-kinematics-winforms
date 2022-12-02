@@ -2,7 +2,7 @@
 > ## MVP-pattern </br>
 <img src="https://user-images.githubusercontent.com/111363234/205174622-c8bfb77d-b85c-4852-bfe1-f865637eaf41.png" width="400" height="400" /> 
 
-# mechanism-kinematics-winforms-mvp </br>
+# App </br>
 
 ![image](https://user-images.githubusercontent.com/111363234/205174928-d9b079ae-e2ce-4ec6-a467-479b42b1aa72.png) </br> 
 
