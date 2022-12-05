@@ -8,10 +8,10 @@ namespace MechanismKinematics
 
         public double GetOmega()
         {
-            double defaultSpeed = 0.5;
+            const double defaultSpeed = 0.5;
             try
             {
-                int afterNumberSymbolsCount = 6;
+                const int afterNumberSymbolsCount = 6;
                 return OmegaFullString != null ?
                     Convert.ToDouble(OmegaFullString.Remove
                     (OmegaFullString.Length - afterNumberSymbolsCount, afterNumberSymbolsCount)

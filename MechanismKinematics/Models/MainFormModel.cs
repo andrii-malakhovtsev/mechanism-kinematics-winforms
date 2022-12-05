@@ -5,7 +5,7 @@ namespace MechanismKinematics
 {
     public class MainFormModel
     {
-        private static readonly double s_frameInterval = 0.1;
+        private const double FrameInterval = 0.1;
         private readonly MechanismController _mechanismController;
         public Point Center { get; set; }
         public Graphics Graphics { get; set; } = null;
@@ -90,7 +90,7 @@ namespace MechanismKinematics
         {
             _mechanismController.RefreshFields();
             _mechanismController.RefreshPicture(clear: false, clearStable: false);
-            Time += s_frameInterval;
+            Time += FrameInterval;
             _mechanismController.RefreshPicture(clear: true, clearStable: false);
             _mechanismController.CountTrajectory();
         }

@@ -7,7 +7,7 @@ namespace MechanismKinematics
 {
     public class MechanismController
     {
-        private static readonly int s_heightIndent = 10;
+        private const int HeightIndent = 10;
         private readonly MainFormModel _mainFormModel;
         private Graphics _graphics;
         private List<Point> _pointAList = null;
@@ -44,8 +44,8 @@ namespace MechanismKinematics
 
         public void SpecifyOmega()
         {
-            int timerOriginalInterval = 100,
-                timerIntervalPayback = timerOriginalInterval / _mainFormModel.TimerInterval;
+            const int timerOriginalInterval = 100;
+            int timerIntervalPayback = timerOriginalInterval / _mainFormModel.TimerInterval;
             _omega /= timerIntervalPayback;
         }
 
@@ -59,9 +59,8 @@ namespace MechanismKinematics
 
         public void ClearDrawing()
         {
-            SolidBrush solidBrush = new SolidBrush(Color.White);
-            _graphics.FillRectangle(solidBrush, 0, 0, 0, 0);
-            solidBrush.Dispose();
+            using (SolidBrush solidBrush = new SolidBrush(Color.White))
+            { _graphics.FillRectangle(solidBrush, 0, 0, 0, 0); }
             _mainFormModel.MechanismDrawn = false;
             _graphics.Clear(Color.White);
         }
@@ -95,7 +94,7 @@ namespace MechanismKinematics
                 (_center.X - _radiusOne,
                  _center.Y + heightIndent,
                  2 * _radiusOne,
-                 _radiusOne + s_heightIndent - heightIndent);
+                 _radiusOne + HeightIndent - heightIndent);
             RefreshWheelOne(clearStable);
             RefreshRotationAngle();
             SetPointsCoordinates(byDefault: true);
@@ -157,7 +156,7 @@ namespace MechanismKinematics
 
         private void RefreshBearing()
         {
-            int widthIndent = 4, heightIndent = 3, bearingSize = 8;
+            const int widthIndent = 4, heightIndent = 3, bearingSize = 8;
             _pen.DashStyle = DashStyle.Solid;
             _rectangle.Location = SetPoint(-widthIndent, -heightIndent);
             _rectangle.Size = new Size(bearingSize, bearingSize);
@@ -166,7 +165,7 @@ namespace MechanismKinematics
 
         private void RefreshBearingLines()
         {
-            int bearingLinesWidth = 7, bearingLinesHeight = 16;
+            const int bearingLinesWidth = 7, bearingLinesHeight = 16;
             Point point = SetPoint(-bearingLinesWidth, bearingLinesHeight);
             _graphics.DrawLine(_pen, point, _center);
             point = SetPoint(bearingLinesWidth, bearingLinesHeight);
@@ -175,9 +174,9 @@ namespace MechanismKinematics
 
         private void RefreshShading(bool clearStable)
         {
-            int shadingWidth = 15, shadingHeight = 16;
+            const int shadingWidth = 15, shadingHeight = 16;
             _rectangle.Location = new Point(_center.X - shadingWidth, _center.Y + shadingHeight);
-            _rectangle.Size = new Size(shadingWidth * 2, s_heightIndent);
+            _rectangle.Size = new Size(shadingWidth * 2, HeightIndent);
             HatchBrush brush = clearStable ?
                   new HatchBrush(HatchStyle.ForwardDiagonal, Color.White, Color.White)
                 : new HatchBrush(HatchStyle.ForwardDiagonal, Color.Black, Color.White);
@@ -191,13 +190,14 @@ namespace MechanismKinematics
 
         private void RefreshWheelTwo()
         {
-            int heightIndent = _radiusOne / 5, widthIndent = 4;
+            const int widthIndent = 4;
+            int heightIndent = _radiusOne / 5;
             _pen.DashStyle = DashStyle.Solid;
             Rectangle rectangle = new Rectangle
                 (_center.X - _radiusOne,
                  _center.Y + widthIndent * heightIndent,
                  2 * _radiusOne,
-                 _radiusOne + s_heightIndent - (widthIndent * heightIndent))
+                 _radiusOne + HeightIndent - (widthIndent * heightIndent))
             {
                 Location = SetPoint(-_radiusTwo, -_radiusTwo),
                 Size = new Size(2 * _radiusTwo, 2 * _radiusTwo)
@@ -268,10 +268,10 @@ namespace MechanismKinematics
 
         private void RefreshWeight(bool isRadiusOne)
         {
+            const int panelHeight = 139, weightHeightSize = 31, weightWidth = 15;
             int weightHeight = isRadiusOne ? 40 : 20,
                       radius = isRadiusOne ? _radiusOne : _radiusTwo,
                 weightLowestHeight = _center.Y + radius + weightHeight,
-                panelHeight = 139, weightHeightSize = 31, weightWidth = 15,
                 weightLowestHeightPossible = _mainFormModel.GetPictureBoxHeight() - weightHeightSize,
                 weightCurrentLowestHeight = _mainFormModel.GetPictureBoxHeight() - panelHeight
                 + (radius - weightHeight * 2) * 2;
