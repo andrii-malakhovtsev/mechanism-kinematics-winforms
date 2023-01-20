@@ -45,7 +45,7 @@ namespace MechanismKinematics
         public void SpecifyOmega()
         {
             const int timerOriginalInterval = 100;
-            int timerIntervalPayback = timerOriginalInterval / _mainFormModel.TimerInterval;
+            int timerIntervalPayback = timerOriginalInterval / MainFormModel.TimerInterval;
             _omega /= timerIntervalPayback;
         }
 
@@ -272,8 +272,8 @@ namespace MechanismKinematics
             int weightHeight = isRadiusOne ? 40 : 20,
                       radius = isRadiusOne ? _radiusOne : _radiusTwo,
                 weightLowestHeight = _center.Y + radius + weightHeight,
-                weightLowestHeightPossible = _mainFormModel.GetPictureBoxHeight() - weightHeightSize,
-                weightCurrentLowestHeight = _mainFormModel.GetPictureBoxHeight() - panelHeight
+                weightLowestHeightPossible = _mainFormModel.PictureBoxHeight - weightHeightSize,
+                weightCurrentLowestHeight = _mainFormModel.PictureBoxHeight - panelHeight
                 + (radius - weightHeight * 2) * 2;
             double linearSpeed = _omega * radius,
                    linearDistance = linearSpeed * _time;

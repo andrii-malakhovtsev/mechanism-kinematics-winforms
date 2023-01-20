@@ -6,6 +6,10 @@ namespace MechanismKinematics
     {
         private readonly GeometricFormModel _model = new GeometricFormModel();
         private readonly IGeometricFormView _view;
+        public string LabelRadiusOneText { get => _model.LabelRadiusOneText; }
+        public string LabelRadiusTwoText { get => _model.LabelRadiusTwoText; }
+        public int RadiusOne { get => _model.RadiusOne; }
+        public int RadiusTwo { get => _model.RadiusTwo; }
 
         public GeometricFormPresenter(IGeometricFormView view)
         {
@@ -24,26 +28,6 @@ namespace MechanismKinematics
         {
             _view.RadiusOne = _model.RadiusOne;
             _view.RadiusTwo = _model.RadiusTwo;
-        }
-
-        public string GetLabelRadiusOneText()
-        {
-            return _model.GetLabelRadiusOneText();
-        }
-
-        public string GetLabelRadiusTwoText()
-        {
-            return _model.GetLabelRadiusTwoText();
-        }
-
-        public int GetRadiusOne()
-        {
-            return _model.RadiusOne;
-        }
-
-        public int GetRadiusTwo()
-        {
-            return _model.RadiusTwo;
         }
 
         private void OnOKClick(object sender, EventArgs e)
