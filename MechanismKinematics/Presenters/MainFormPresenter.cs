@@ -8,6 +8,8 @@ namespace MechanismKinematics
         private readonly IMainFormView _view;
         public event EventHandler<EventArgs> MakeNewGeometricForm;
         public event EventHandler<EventArgs> MakeNewKinematicForm;
+        public int RadiusOne { get => _model.RadiusOne; }
+        public int RadiusTwo { get => _model.RadiusTwo; }
 
         public MainFormPresenter(IMainFormView view)
         {
@@ -41,7 +43,7 @@ namespace MechanismKinematics
         {
             _model.ClearMechanism();
             @event?.Invoke(this, EventArgs.Empty);
-            _view.LabelOmegaText = _model.GetLabelOmegaText();
+            _view.LabelOmegaText = _model.LabelOmegaText;
             _model.DrawToolStripEnabled = _view.DrawToolStripEnabled; 
             _model.DrawMechanismAfterForm();
         }
@@ -111,20 +113,20 @@ namespace MechanismKinematics
         private void OnAppOpen(object sender, EventArgs e)
         {
             _model.MenuStripHeight = _view.MenuStripHeight;
-            _model.ClientSizeWidth = _view.ClientSizeWidth;
+            _model.PictureBoxWidth = _view.ClientSizeWidth;
             _model.ClientSizeHeight = _view.ClientSizeHeight;
             _model.MenuStripHeight = _view.MenuStripHeight;
             _model.PanelHeight = _view.PanelHeight;
-            _view.PictureBoxLocation = _model.GetPictureBoxLocation();
-            _view.PictureBoxHeight = _model.GetPictureBoxHeight();
-            _view.PictureBoxWidth = _model.GetPictureBoxWidth();
-            _model.SetCenterCoordinates();
+            _view.PictureBoxLocation = _model.PictureBoxLocation;
+            _view.PictureBoxHeight = _model.PictureBoxHeight;
+            _view.PictureBoxWidth = _model.PictureBoxWidth;
+            _model.SetCenterCooridnates();
             _model.Graphics = _view.Graphics;
             RefreshView();
-            _view.LabelRadiusOneText = _model.GetLabelRadiusOneText();
-            _view.LabelRadiusTwoText = _model.GetLabelRadiusTwoText();
-            _view.LabelOmegaText = _model.GetLabelOmegaText();
-            _view.TimerInterval = _model.GetTimerInterval();
+            _view.LabelRadiusOneText = _model.LabelRadiusOneText;
+            _view.LabelRadiusTwoText = _model.LabelRadiusTwoText;
+            _view.LabelOmegaText = _model.LabelOmegaText;
+            _view.TimerInterval = MainFormModel.TimerInterval;
         }
 
         private void SetView()
@@ -145,16 +147,6 @@ namespace MechanismKinematics
             _view.TimerEnabled = _model.TimerEnabled;
             _view.GeometricToolStripEnabled = _model.GeometricToolStripEnabled;
             _view.KinematicToolStripEnabled = _model.KinematicToolStripEnabled;
-        }
-
-        public int GetRadiusOne() 
-        {
-            return _model.RadiusOne; 
-        }
-
-        public int GetRadiusTwo() 
-        {
-            return _model.RadiusTwo;
         }
 
         public void SetRadiusesText(string radiusOneText, string radiusTwoText)

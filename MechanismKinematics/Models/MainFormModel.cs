@@ -6,14 +6,20 @@ namespace MechanismKinematics
     public class MainFormModel
     {
         private const double FrameInterval = 0.1;
+        public const int TimerInterval = 20;
         private readonly MechanismController _mechanismController;
         public Point Center { get; set; }
+        public Point PictureBoxLocation { get => new Point(0, MenuStripHeight); }
         public Graphics Graphics { get; set; } = null;
+        public string LabelRadiusOneText { get => GetLabelRadiusText(RadiusOne); }
+        public string LabelRadiusTwoText { get => GetLabelRadiusText(RadiusTwo); }
+        public string LabelOmegaText { get => Convert.ToString(Omega) + " rad/s"; }
         public int RadiusOne { get; set; } = 80;
         public int RadiusTwo { get; set; } = 120;
-        public int TimerInterval { get; set; } = 20;
+        //public int TimerInterval { get => (int)(20 / Omega); }
         public int ClientSizeHeight { get; set; }
-        public int ClientSizeWidth { get; set; }
+        public int PictureBoxWidth { get; set; }
+        public int PictureBoxHeight { get => ClientSizeHeight - MenuStripHeight - PanelHeight; }
         public int PanelHeight { get; set; }
         public int MenuStripHeight { get; set; }
         public double Omega { get; set; } = 0.5;
@@ -36,49 +42,14 @@ namespace MechanismKinematics
             _mechanismController = new MechanismController(this);
         }
 
-        public Point GetPictureBoxLocation()
+        private string GetLabelRadiusText(int radius)
         {
-            return new Point(0, MenuStripHeight);
+            return Convert.ToString(radius) + " inches";
         }
 
-        public int GetPictureBoxWidth()
+        public void SetCenterCooridnates()
         {
-            return ClientSizeWidth;
-        }
-
-        public int GetPictureBoxHeight()
-        {
-            return ClientSizeHeight - MenuStripHeight - PanelHeight;
-        }
-
-        public void SetCenterCoordinates()
-        {
-            Center = new Point(GetPictureBoxWidth() / 2, GetPictureBoxHeight() / 2);
-        }
-
-        public string GetLabelRadiusOneText()
-        {
-            return GetLabelRadiusText(isRadiusOne: true) ;
-        }
-
-        public string GetLabelRadiusTwoText()
-        {
-            return GetLabelRadiusText(isRadiusOne: false);
-        }
-
-        private string GetLabelRadiusText(bool isRadiusOne)
-        {
-            return Convert.ToString(isRadiusOne ? RadiusOne : RadiusTwo) + " inches";
-        }
-
-        public string GetLabelOmegaText()
-        {
-            return Convert.ToString(Omega) + " rad/s";
-        }
-
-        public int GetTimerInterval()
-        {
-            return (int)(TimerInterval / Omega);
+            Center = new Point(PictureBoxWidth / 2, PictureBoxHeight / 2);
         }
 
         public void ResetTime()
@@ -109,7 +80,7 @@ namespace MechanismKinematics
 
         public void PictureBoxPaint()
         {
-            if (MechanismDrawn) 
+            if (MechanismDrawn)
                 _mechanismController.RefreshPicture(clear: true, clearStable: false);
         }
 

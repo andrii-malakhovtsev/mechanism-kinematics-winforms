@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "7241fa88-cdfa-46aa-8330-bd78b64bdb89": {
+      "ProjectGuid": "7241fa88-cdfa-46aa-8330-bd78b64bdb89",
+      "DisplayName": "MechanismKinematics",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 1
+}

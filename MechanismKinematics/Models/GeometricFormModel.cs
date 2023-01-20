@@ -6,15 +6,12 @@ namespace MechanismKinematics
     {
         public int RadiusOne { get; set; }
         public int RadiusTwo { get; set; }
+        public string LabelRadiusOneText { get => GetLabelRadiusText(RadiusOne); }
+        public string LabelRadiusTwoText { get => GetLabelRadiusText(RadiusTwo); }
 
-        public string GetLabelRadiusOneText()
+        public string GetLabelRadiusText(int radius)
         {
-            return Convert.ToString(RadiusOne) + " inches";
-        }
-
-        public string GetLabelRadiusTwoText()
-        {
-            return Convert.ToString(RadiusTwo) + " inches";
+            return Convert.ToString(radius) + " inches";
         }
     }
 }
