@@ -55,6 +55,10 @@ namespace MechanismKinematics
         public MainForm()
         {
             InitializeComponent();
+            SetStyle(ControlStyles.OptimizedDoubleBuffer |
+                     ControlStyles.UserPaint |
+                     ControlStyles.AllPaintingInWmPaint, true);
+            DoubleBuffered = true;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
