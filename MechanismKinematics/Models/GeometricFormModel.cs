@@ -9,7 +9,7 @@ namespace MechanismKinematics
         public string LabelRadiusOneText { get => GetLabelRadiusText(RadiusOne); }
         public string LabelRadiusTwoText { get => GetLabelRadiusText(RadiusTwo); }
 
-        public string GetLabelRadiusText(int radius)
+        private string GetLabelRadiusText(int radius)
         {
             return Convert.ToString(radius) + " inches";
         }
