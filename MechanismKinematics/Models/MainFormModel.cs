@@ -6,8 +6,13 @@ namespace MechanismKinematics
     public class MainFormModel
     {
         private const double FrameInterval = 0.1;
+        private const int MaxOmegaValue = 100;
         public const int TimerInterval = 20;
         private readonly MechanismController _mechanismController;
+        private double _omega = 0.5;
+        private double _time = 0;
+        private int _radiusOne = 80;
+        private int _radiusTwo = 120;
 
         public MainFormModel()
         {
@@ -20,15 +25,23 @@ namespace MechanismKinematics
         public string LabelRadiusOneText { get => GetLabelRadiusText(RadiusOne); }
         public string LabelRadiusTwoText { get => GetLabelRadiusText(RadiusTwo); }
         public string LabelOmegaText { get => Convert.ToString(Omega) + " rad/s"; }
-        public int RadiusOne { get; set; } = 80;
-        public int RadiusTwo { get; set; } = 120;
+        public int RadiusOne { get { return _radiusOne; } set { if (value >= 0) _radiusOne = value; } }
+        public int RadiusTwo { get { return _radiusTwo; } set { if (value >= 0) _radiusTwo = value; } }
         public int ClientSizeHeight { private get; set; }
         public int PictureBoxWidth { get; set; }
         public int PictureBoxHeight { get => ClientSizeHeight - MenuStripHeight - PanelHeight; }
         public int PanelHeight { private get; set; }
         public int MenuStripHeight { private get; set; }
-        public double Omega { get; set; } = 0.5;
-        public double Time { get; private set; } = 0;
+        public double Omega 
+        { 
+            get { return _omega; } 
+            set 
+            { 
+                if (value >= -MaxOmegaValue && value <= MaxOmegaValue)
+                    _omega = value; 
+            } 
+        }
+        public double Time { get { return _time; } private set { if (value >= 0) _time = value; } }
         public bool MechanismDrawn { get; set; } = false;
         public bool TimerEnabled { get; private set; } = true;
         public bool ClearToolStripEnabled { get; private set; } = false;
@@ -59,7 +72,6 @@ namespace MechanismKinematics
 
         public void TimerTick()
         {
-            //_mechanismController.RefreshFields();
             _mechanismController.RefreshPicture(clear: false, clearStable: false);
             Time += FrameInterval;
             _mechanismController.RefreshPicture(clear: true, clearStable: false);
@@ -86,7 +98,8 @@ namespace MechanismKinematics
 
         public void DrawMechanismAfterForm()
         {
-            if (!DrawToolStripEnabled) DrawMechanism();
+            if (!DrawToolStripEnabled) 
+                DrawMechanism();
         }
 
         public void DrawMechanism()

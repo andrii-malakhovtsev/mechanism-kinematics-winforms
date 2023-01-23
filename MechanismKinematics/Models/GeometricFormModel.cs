@@ -4,8 +4,11 @@ namespace MechanismKinematics
 {
     public class GeometricFormModel
     {
-        public int RadiusOne { get; set; }
-        public int RadiusTwo { get; set; }
+        private int _radiusOne;
+        private int _radiusTwo;
+
+        public int RadiusOne { get { return _radiusOne; } set { if (value >= 0) _radiusOne = value; } }
+        public int RadiusTwo { get { return _radiusTwo; } set { if (value >= 0) _radiusTwo = value; } }
         public string LabelRadiusOneText { get => GetLabelRadiusText(RadiusOne); }
         public string LabelRadiusTwoText { get => GetLabelRadiusText(RadiusTwo); }
 
