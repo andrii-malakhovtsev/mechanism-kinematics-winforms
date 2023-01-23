@@ -4,7 +4,7 @@ namespace MechanismKinematics
 {
     public class KinematicFormModel
     {
-        public string OmegaFullString { get; set; }
+        public string OmegaFullString { private get; set; }
         public double Omega
         {
             get

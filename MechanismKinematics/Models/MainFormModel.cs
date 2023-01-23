@@ -8,6 +8,12 @@ namespace MechanismKinematics
         private const double FrameInterval = 0.1;
         public const int TimerInterval = 20;
         private readonly MechanismController _mechanismController;
+
+        public MainFormModel()
+        {
+            _mechanismController = new MechanismController(this);
+        }
+
         public Point Center { get; set; }
         public Point PictureBoxLocation { get => new Point(0, MenuStripHeight); }
         public Graphics Graphics { get; set; } = null;
@@ -16,30 +22,25 @@ namespace MechanismKinematics
         public string LabelOmegaText { get => Convert.ToString(Omega) + " rad/s"; }
         public int RadiusOne { get; set; } = 80;
         public int RadiusTwo { get; set; } = 120;
-        public int ClientSizeHeight { get; set; }
+        public int ClientSizeHeight { private get; set; }
         public int PictureBoxWidth { get; set; }
         public int PictureBoxHeight { get => ClientSizeHeight - MenuStripHeight - PanelHeight; }
-        public int PanelHeight { get; set; }
-        public int MenuStripHeight { get; set; }
+        public int PanelHeight { private get; set; }
+        public int MenuStripHeight { private get; set; }
         public double Omega { get; set; } = 0.5;
-        public double Time { get; set; } = 0;
+        public double Time { get; private set; } = 0;
         public bool MechanismDrawn { get; set; } = false;
-        public bool TimerEnabled { get; set; } = true;
-        public bool ClearToolStripEnabled { get; set; } = false;
-        public bool StartToolStripEnabled { get; set; } = false;
-        public bool StopToolStripEnabled { get; set; } = false;
+        public bool TimerEnabled { get; private set; } = true;
+        public bool ClearToolStripEnabled { get; private set; } = false;
+        public bool StartToolStripEnabled { get; private set; } = false;
+        public bool StopToolStripEnabled { get; private set; } = false;
         public bool DrawToolStripEnabled { get; set; } = true;
-        public bool PointAEnabled { get; set; } = false;
-        public bool PointBEnabled { get; set; } = false;
-        public bool GeometricToolStripEnabled { get; set; }
-        public bool KinematicToolStripEnabled { get; set; }
+        public bool PointAEnabled { get; private set; } = false;
+        public bool PointBEnabled { get; private set; } = false;
+        public bool GeometricToolStripEnabled { get; private set; }
+        public bool KinematicToolStripEnabled { get; private set; }
         public bool PointAChecked { get; set; }
         public bool PointBChecked { get; set; }
-
-        public MainFormModel()
-        {
-            _mechanismController = new MechanismController(this);
-        }
 
         private string GetLabelRadiusText(int radius)
         {

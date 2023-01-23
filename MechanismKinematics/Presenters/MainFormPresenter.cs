@@ -8,8 +8,6 @@ namespace MechanismKinematics
         private readonly IMainFormView _view;
         public event EventHandler<EventArgs> MakeNewGeometricForm;
         public event EventHandler<EventArgs> MakeNewKinematicForm;
-        public int RadiusOne { get => _model.RadiusOne; }
-        public int RadiusTwo { get => _model.RadiusTwo; }
 
         public MainFormPresenter(IMainFormView view)
         {
@@ -28,6 +26,9 @@ namespace MechanismKinematics
             _view.KinematicFormOpen += new EventHandler<EventArgs>(OnKinematicFormOpen);
             SetView();
         }
+
+        public int RadiusOne { get => _model.RadiusOne; }
+        public int RadiusTwo { get => _model.RadiusTwo; }
 
         private void OnKinematicFormOpen(object sender, EventArgs e)
         {

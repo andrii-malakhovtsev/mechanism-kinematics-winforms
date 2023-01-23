@@ -5,6 +5,11 @@ namespace MechanismKinematics
 {
     public partial class GeometricForm : Form, IGeometricFormView
     {
+        public GeometricForm()
+        {
+            InitializeComponent();
+        }
+
         #region Interface implementation
 
         public int RadiusOne { get; set; }
@@ -14,10 +19,6 @@ namespace MechanismKinematics
 
         #endregion
 
-        public GeometricForm()
-        {
-            InitializeComponent();
-        }
 
         private void GeometricForm_Load(object sender, EventArgs e)
         {

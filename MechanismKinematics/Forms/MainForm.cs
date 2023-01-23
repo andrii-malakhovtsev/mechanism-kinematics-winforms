@@ -6,6 +6,15 @@ namespace MechanismKinematics
 {
     public partial class MainForm : Form, IMainFormView
     {
+        public MainForm()
+        {
+            InitializeComponent();
+            SetStyle(ControlStyles.OptimizedDoubleBuffer |
+                     ControlStyles.UserPaint |
+                     ControlStyles.AllPaintingInWmPaint, true);
+            DoubleBuffered = true;
+        }
+
         #region Interface implementation
 
         public Graphics Graphics { get; set; }
@@ -51,15 +60,6 @@ namespace MechanismKinematics
         public event EventHandler<EventArgs> KinematicFormOpen;
 
         #endregion
-
-        public MainForm()
-        {
-            InitializeComponent();
-            SetStyle(ControlStyles.OptimizedDoubleBuffer |
-                     ControlStyles.UserPaint |
-                     ControlStyles.AllPaintingInWmPaint, true);
-            DoubleBuffered = true;
-        }
 
         private void MainForm_Load(object sender, EventArgs e)
         {

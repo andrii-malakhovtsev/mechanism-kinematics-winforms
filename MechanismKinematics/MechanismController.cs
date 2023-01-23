@@ -31,7 +31,9 @@ namespace MechanismKinematics
             RefreshFields();
         }
 
-        public void RefreshFields()
+        // add properties 
+
+        public void RefreshFields()//
         {
             _radiusOne = _mainFormModel.RadiusOne;
             _radiusTwo = _mainFormModel.RadiusTwo;
@@ -42,7 +44,7 @@ namespace MechanismKinematics
             _center = _mainFormModel.Center;
         }
 
-        public void SpecifyOmega()
+        public void SpecifyOmega()//
         {
             const int timerOriginalInterval = 100;
             int timerIntervalPayback = timerOriginalInterval / MainFormModel.TimerInterval;
@@ -242,12 +244,12 @@ namespace MechanismKinematics
             return axisCoordinate * radius;
         }
 
-        private void RefreshWeightOne()
+        private void RefreshWeightOne() //
         {
-            RefreshWeight(isRadiusOne: true);
+            RefreshWeight(isRadiusOne: true); 
         }
 
-        private void RefreshWeightTwo()
+        private void RefreshWeightTwo() //
         {
             RefreshWeight(isRadiusOne: false);
         }
