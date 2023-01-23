@@ -8,17 +8,16 @@ namespace MechanismKinematics
 
         public MainInteractions(MainForm mainView)
         {
-            MainFormModel mainFormModel = new MainFormModel();
-            MainFormPresenter mainFormPresenter = new MainFormPresenter(mainView);
-            _mainFormPresenter = mainFormPresenter;
-            mainFormPresenter.MakeNewGeometricForm += new EventHandler<EventArgs>(OnMakeNewGeometricForm);
-            mainFormPresenter.MakeNewKinematicForm += new EventHandler<EventArgs>(OnMakeNewKinematicForm);
+            var mainFormModel = new MainFormModel();
+            _mainFormPresenter = new MainFormPresenter(mainView);
+            _mainFormPresenter.MakeNewGeometricForm += new EventHandler<EventArgs>(OnMakeNewGeometricForm);
+            _mainFormPresenter.MakeNewKinematicForm += new EventHandler<EventArgs>(OnMakeNewKinematicForm);
         }
 
         public void OnMakeNewGeometricForm(object sender, EventArgs e)
         {
-            GeometricForm geometricForm = new GeometricForm();
-            GeometricFormPresenter geometricFormPresenter = new GeometricFormPresenter(geometricForm);
+            var geometricForm = new GeometricForm();
+            var geometricFormPresenter = new GeometricFormPresenter(geometricForm);
             geometricFormPresenter.SetParameters(_mainFormPresenter.RadiusOne, 
                 _mainFormPresenter.RadiusTwo);
             geometricForm.ShowDialog();
@@ -30,8 +29,8 @@ namespace MechanismKinematics
 
         public void OnMakeNewKinematicForm(object sender, EventArgs e)
         {
-            KinematicForm kinematicForm = new KinematicForm();
-            KinematicFormPresenter kinematicFormPresenter = new KinematicFormPresenter(kinematicForm);
+            var kinematicForm = new KinematicForm();
+            var kinematicFormPresenter = new KinematicFormPresenter(kinematicForm);
             kinematicForm.ShowDialog();
             _mainFormPresenter.SetOmega(kinematicFormPresenter.Omega);
         }

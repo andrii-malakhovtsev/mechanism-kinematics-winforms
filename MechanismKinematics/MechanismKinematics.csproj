@@ -61,7 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MechanismController.cs" />
+    <Compile Include="Models\MechanismController.cs" />
     <Compile Include="Models\GeometricFormModel.cs" />
     <Compile Include="Presenters\GeometricFormPresenter.cs" />
     <Compile Include="Forms\MainForm.cs">
@@ -89,7 +89,7 @@
     <Compile Include="Views\IKinematicFormView.cs" />
     <Compile Include="Models\KinematicFormModel.cs" />
     <Compile Include="Presenters\KinematicFormPresenter.cs" />
-    <Compile Include="MainInteractions.cs" />
+    <Compile Include="Presenters\MainInteractions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\MainForm.resx">
