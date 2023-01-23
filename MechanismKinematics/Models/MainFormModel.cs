@@ -59,7 +59,7 @@ namespace MechanismKinematics
 
         public void TimerTick()
         {
-            _mechanismController.RefreshFields();
+            //_mechanismController.RefreshFields();
             _mechanismController.RefreshPicture(clear: false, clearStable: false);
             Time += FrameInterval;
             _mechanismController.RefreshPicture(clear: true, clearStable: false);
