@@ -33,8 +33,8 @@ namespace MechanismKinematics
         public int PanelHeight { private get; set; }
         public int MenuStripHeight { private get; set; }
         public double Omega 
-        { 
-            get { return _omega; } 
+        {
+            get => _omega; 
             set 
             { 
                 if (value >= -MaxOmegaValue && value <= MaxOmegaValue)
