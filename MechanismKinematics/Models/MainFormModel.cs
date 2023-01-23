@@ -25,16 +25,16 @@ namespace MechanismKinematics
         public string LabelRadiusOneText { get => GetLabelRadiusText(RadiusOne); }
         public string LabelRadiusTwoText { get => GetLabelRadiusText(RadiusTwo); }
         public string LabelOmegaText { get => Convert.ToString(Omega) + " rad/s"; }
-        public int RadiusOne { get { return _radiusOne; } set { if (value >= 0) _radiusOne = value; } }
-        public int RadiusTwo { get { return _radiusTwo; } set { if (value >= 0) _radiusTwo = value; } }
+        public int RadiusOne { get => _radiusOne; set { if (value >= 0) _radiusOne = value; } }
+        public int RadiusTwo { get => _radiusTwo; set { if (value >= 0) _radiusTwo = value; } }
         public int ClientSizeHeight { private get; set; }
         public int PictureBoxWidth { get; set; }
         public int PictureBoxHeight { get => ClientSizeHeight - MenuStripHeight - PanelHeight; }
         public int PanelHeight { private get; set; }
         public int MenuStripHeight { private get; set; }
         public double Omega 
-        { 
-            get { return _omega; } 
+        {
+            get => _omega; 
             set 
             { 
                 if (value >= -MaxOmegaValue && value <= MaxOmegaValue)
