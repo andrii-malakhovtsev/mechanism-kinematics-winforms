@@ -96,7 +96,7 @@ namespace MechanismKinematics
                 _mechanismController.RefreshPicture(clear: true, clearStable: false);
         }
 
-        public void DrawMechanismAfterForm()
+        public void DrawMechanismAfterFormClose()
         {
             if (!DrawToolStripEnabled) 
                 DrawMechanism();

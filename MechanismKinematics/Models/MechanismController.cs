@@ -42,8 +42,8 @@ namespace MechanismKinematics
         {
             _pointsA.Clear();
             _pointsB.Clear();
-            _pointsA.Add(TrajectoryPoint(RadiusOne));
-            _pointsB.Add(TrajectoryPoint(RadiusTwo));
+            _pointsA.Add(GetTrajectoryPoint(RadiusOne));
+            _pointsB.Add(GetTrajectoryPoint(RadiusTwo));
         }
 
         public void ClearDrawing()
@@ -69,8 +69,8 @@ namespace MechanismKinematics
 
         public void CountTrajectory()
         {
-            _pointsA.Add(TrajectoryPoint(RadiusOne));
-            _pointsB.Add(TrajectoryPoint(RadiusTwo));
+            _pointsA.Add(GetTrajectoryPoint(RadiusOne));
+            _pointsB.Add(GetTrajectoryPoint(RadiusTwo));
             DrawTrajectory(_mainFormModel.PointAChecked, Color.Red, _pointsA);
             DrawTrajectory(_mainFormModel.PointBChecked, Color.Blue, _pointsB);
         }
@@ -85,7 +85,7 @@ namespace MechanismKinematics
                  2 * RadiusOne,
                  RadiusOne + HeightIndent - heightIndent);
             RefreshWheelOne(clearStable);
-            RefreshRotationAngle(); //
+            RefreshRotationAngle();
             SetPointsCoordinates(byDefault: true);
             RefreshWheelOneShading(clear);
             RefreshBearing();
@@ -106,7 +106,7 @@ namespace MechanismKinematics
             if (Time != 0) Graphics.DrawCurve(_pen, pointArray);
         }
 
-        private Point TrajectoryPoint(int radius)
+        private Point GetTrajectoryPoint(int radius)
         {
             var point = new Point();
             _xCircleCoordianate = OnCircleCoordinate(xAxis: true, radius);
@@ -147,7 +147,7 @@ namespace MechanismKinematics
         {
             const int widthIndent = 4, heightIndent = 3, bearingSize = 8;
             _pen.DashStyle = DashStyle.Solid;
-            _rectangle.Location = SetPoint(-widthIndent, -heightIndent);
+            _rectangle.Location = SetCenteredPoint(-widthIndent, -heightIndent);
             _rectangle.Size = new Size(bearingSize, bearingSize);
             Graphics.DrawEllipse(_pen, _rectangle);
         }
@@ -155,9 +155,9 @@ namespace MechanismKinematics
         private void RefreshBearingLines()
         {
             const int bearingLinesWidth = 7, bearingLinesHeight = 16;
-            Point point = SetPoint(-bearingLinesWidth, bearingLinesHeight);
+            Point point = SetCenteredPoint(-bearingLinesWidth, bearingLinesHeight);
             Graphics.DrawLine(_pen, point, Center);
-            point = SetPoint(bearingLinesWidth, bearingLinesHeight);
+            point = SetCenteredPoint(bearingLinesWidth, bearingLinesHeight);
             Graphics.DrawLine(_pen, Center, point);
         }
 
@@ -188,7 +188,7 @@ namespace MechanismKinematics
                  2 * RadiusOne,
                  RadiusOne + HeightIndent - (widthIndent * heightIndent))
             {
-                Location = SetPoint(-RadiusTwo, -RadiusTwo),
+                Location = SetCenteredPoint(-RadiusTwo, -RadiusTwo),
                 Size = new Size(2 * RadiusTwo, 2 * RadiusTwo)
             };
             Graphics.DrawEllipse(_pen, rectangle);
@@ -220,7 +220,7 @@ namespace MechanismKinematics
             point.Y = Convert.ToInt32(Center.Y + _yCircleCoordianate);
         }
 
-        private Point SetPoint(int xOffset, int yOffset)
+        private Point SetCenteredPoint(int xOffset, int yOffset)
         {
             return new Point(Center.X + xOffset, Center.Y + yOffset);
         }

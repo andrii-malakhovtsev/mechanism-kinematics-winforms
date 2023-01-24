@@ -46,7 +46,7 @@ namespace MechanismKinematics
             @event?.Invoke(this, EventArgs.Empty);
             _view.LabelOmegaText = _model.LabelOmegaText;
             _model.DrawToolStripEnabled = _view.DrawToolStripEnabled; 
-            _model.DrawMechanismAfterForm();
+            _model.DrawMechanismAfterFormClose();
         }
 
         private void OnPointAMenuStripClick(object sender, EventArgs e)
