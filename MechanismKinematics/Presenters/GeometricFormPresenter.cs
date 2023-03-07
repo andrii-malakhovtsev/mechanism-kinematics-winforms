@@ -15,8 +15,11 @@ namespace MechanismKinematics
         }
 
         public string LabelRadiusOneText { get => _model.LabelRadiusOneText; }
+
         public string LabelRadiusTwoText { get => _model.LabelRadiusTwoText; }
+
         public int RadiusOne { get => _model.RadiusOne; }
+
         public int RadiusTwo { get => _model.RadiusTwo; }
 
         public void SetParameters(int radiusOne, int radiusTwo)

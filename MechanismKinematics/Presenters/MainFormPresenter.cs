@@ -28,6 +28,7 @@ namespace MechanismKinematics
         }
 
         public int RadiusOne { get => _model.RadiusOne; }
+
         public int RadiusTwo { get => _model.RadiusTwo; }
 
         private void OnKinematicFormOpen(object sender, EventArgs e)

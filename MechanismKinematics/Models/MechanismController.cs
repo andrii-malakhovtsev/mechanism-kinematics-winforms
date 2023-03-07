@@ -26,9 +26,13 @@ namespace MechanismKinematics
         }
 
         private int RadiusOne { get => _mainFormModel.RadiusOne; }
+
         private int RadiusTwo { get => _mainFormModel.RadiusTwo; }
+
         private double Time { get => _mainFormModel.Time; }
+
         private Point Center { get => _mainFormModel.Center; }
+
         private Graphics Graphics { get => _mainFormModel.Graphics; }
 
         public void SpecifyOmega()
