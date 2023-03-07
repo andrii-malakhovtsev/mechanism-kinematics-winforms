@@ -20,18 +20,31 @@ namespace MechanismKinematics
         }
 
         public Point Center { get; set; }
+
         public Point PictureBoxLocation { get => new Point(0, MenuStripHeight); }
+
         public Graphics Graphics { get; set; } = null;
+
         public string LabelRadiusOneText { get => GetLabelRadiusText(RadiusOne); }
+
         public string LabelRadiusTwoText { get => GetLabelRadiusText(RadiusTwo); }
+
         public string LabelOmegaText { get => Convert.ToString(Omega) + " rad/s"; }
+
         public int RadiusOne { get => _radiusOne; set { if (value >= 0) _radiusOne = value; } }
+
         public int RadiusTwo { get => _radiusTwo; set { if (value >= 0) _radiusTwo = value; } }
+
         public int ClientSizeHeight { private get; set; }
+
         public int PictureBoxWidth { get; set; }
+
         public int PictureBoxHeight { get => ClientSizeHeight - MenuStripHeight - PanelHeight; }
+
         public int PanelHeight { private get; set; }
+
         public int MenuStripHeight { private get; set; }
+
         public double Omega 
         {
             get => _omega; 
@@ -41,18 +54,31 @@ namespace MechanismKinematics
                     _omega = value; 
             } 
         }
+
         public double Time { get { return _time; } private set { if (value >= 0) _time = value; } }
+
         public bool MechanismDrawn { get; set; } = false;
+
         public bool TimerEnabled { get; private set; } = true;
+
         public bool ClearToolStripEnabled { get; private set; } = false;
+
         public bool StartToolStripEnabled { get; private set; } = false;
+
         public bool StopToolStripEnabled { get; private set; } = false;
+
         public bool DrawToolStripEnabled { get; set; } = true;
+
         public bool PointAEnabled { get; private set; } = false;
+
         public bool PointBEnabled { get; private set; } = false;
+
         public bool GeometricToolStripEnabled { get; private set; }
+
         public bool KinematicToolStripEnabled { get; private set; }
+
         public bool PointAChecked { get; set; }
+
         public bool PointBChecked { get; set; }
 
         private string GetLabelRadiusText(int radius)

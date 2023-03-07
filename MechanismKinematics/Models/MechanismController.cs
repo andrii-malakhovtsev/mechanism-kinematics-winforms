@@ -26,9 +26,13 @@ namespace MechanismKinematics
         }
 
         private int RadiusOne { get => _mainFormModel.RadiusOne; }
+
         private int RadiusTwo { get => _mainFormModel.RadiusTwo; }
+
         private double Time { get => _mainFormModel.Time; }
+
         private Point Center { get => _mainFormModel.Center; }
+
         private Graphics Graphics { get => _mainFormModel.Graphics; }
 
         public void SpecifyOmega()
@@ -274,7 +278,7 @@ namespace MechanismKinematics
             if (WeightLowestHeightDelta(weightLowestHeight, linearDistance) > Center.Y)
             {
                 linearDistance = Math.Abs(linearDistance);
-                SignByBoolean(ref linearDistance, omegaPositive, inverse: false);
+                SignByBoolean(ref linearDistance, omegaPositive);
                 int weightLowestHeightDelta = WeightLowestHeightDelta(weightLowestHeight, linearDistance);
                 bool weightWithinWheel = isRadiusOne ?
                     weightLowestHeightDelta > weightCurrentLowestHeight :
@@ -299,7 +303,7 @@ namespace MechanismKinematics
             _rectangle.Location = new Point(weightHorizotnalDistance, weightLowestPoint);
         }
 
-        private void SignByBoolean(ref double digit, bool boolean, bool inverse)
+        private void SignByBoolean(ref double digit, bool boolean, bool inverse = false)
         {
             digit *= boolean ? 1 : -1;
             digit *= inverse ? -1 : 1;

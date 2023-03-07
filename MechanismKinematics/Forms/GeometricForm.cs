@@ -19,7 +19,6 @@ namespace MechanismKinematics
 
         #endregion
 
-
         private void GeometricForm_Load(object sender, EventArgs e)
         {
             GeometricFormLoad?.Invoke(this, EventArgs.Empty);
