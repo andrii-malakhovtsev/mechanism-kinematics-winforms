@@ -19,7 +19,7 @@ namespace MechanismKinematics
             _mechanismController = new MechanismController(this);
         }
 
-        public Point Center { get; set; }
+        public Point Center { get; private set; }
 
         public Point PictureBoxLocation { get => new Point(0, MenuStripHeight); }
 
