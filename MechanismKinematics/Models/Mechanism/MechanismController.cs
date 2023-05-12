@@ -1,7 +1,7 @@
-﻿using System;
+﻿using MechanismKinematicsWinFormsMVP;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 
 namespace MechanismKinematics
 {
@@ -9,33 +9,36 @@ namespace MechanismKinematics
     {
         private const int HeightIndent = 10;
         private readonly MainFormModel _mainFormModel;
+        private readonly MechanismPainter _mechanismPainter;
         private List<Point> _pointsA = null;
         private List<Point> _pointsB = null;
         private Point _shadingPointOne = new Point();
         private Point _shadingPointTwo = new Point();
-        private Pen _pen;
         private Rectangle _rectangle;
         private double _rotationAngle;
         private double _xCircleCoordianate;
         private double _yCircleCoordianate;
         private double _omega;
 
-        public MechanismController(MainFormModel mainFormModel)
+        public MechanismController(MainFormModel mainFormModel, MechanismPainter mechanismPainter)
         {
             _mainFormModel = mainFormModel;
+            _mechanismPainter = mechanismPainter;
         }
+
+        private Point Center { get => _mainFormModel.Center; }
 
         private int RadiusOne { get => _mainFormModel.RadiusOne; }
 
         private int RadiusTwo { get => _mainFormModel.RadiusTwo; }
 
-        private double Time { get => _mainFormModel.Time; }
+        public Point ShadingPointOne { get => _shadingPointOne; }
 
-        private Point Center { get => _mainFormModel.Center; }
+        public Point ShadingPointTwo { get => _shadingPointTwo; }
 
-        private Graphics Graphics { get => _mainFormModel.Graphics; }
+        public double Time { get => _mainFormModel.Time; }
 
-        public void SpecifyOmega()
+        private void SpecifyOmega()
         {
             const int timerOriginalInterval = 100;
             int timerIntervalPayback = timerOriginalInterval / MainFormModel.TimerInterval;
@@ -50,18 +53,10 @@ namespace MechanismKinematics
             _pointsB.Add(GetTrajectoryPoint(RadiusTwo));
         }
 
-        public void ClearDrawing()
-        {
-            using (SolidBrush solidBrush = new SolidBrush(Color.White))
-            { Graphics.FillRectangle(solidBrush, 0, 0, 0, 0); }
-            _mainFormModel.MechanismDrawn = false;
-            Graphics.Clear(Color.White);
-        }
-
         public void PointCheck()
         {
-            ClearDrawing();
-            RefreshPicture(clear: true, clearStable: false);
+            _mechanismPainter.ClearDrawing();
+            _mechanismPainter.RefreshPicture(clear: true, clearStable: false);
             CountTrajectory();
         }
 
@@ -75,39 +70,8 @@ namespace MechanismKinematics
         {
             _pointsA.Add(GetTrajectoryPoint(RadiusOne));
             _pointsB.Add(GetTrajectoryPoint(RadiusTwo));
-            DrawTrajectory(_mainFormModel.PointAChecked, Color.Red, _pointsA);
-            DrawTrajectory(_mainFormModel.PointBChecked, Color.Blue, _pointsB);
-        }
-
-        public void RefreshPicture(bool clear, bool clearStable)
-        {
-            int heightIndent = 4 * RadiusOne / 5;
-            _pen = new Pen(Color.White);
-            _rectangle = new Rectangle
-                (Center.X - RadiusOne,
-                 Center.Y + heightIndent,
-                 2 * RadiusOne,
-                 RadiusOne + HeightIndent - heightIndent);
-            RefreshWheelOne(clearStable);
-            RefreshRotationAngle();
-            SetPointsCoordinates(byDefault: true);
-            RefreshWheelOneShading(clear);
-            RefreshBearing();
-            RefreshBearingLines();
-            RefreshShading(clearStable);
-            RefreshWheelTwo();
-            RefreshWheelTwoShading(clear);
-            RefreshWeightOne();
-            RefreshWeightTwo();
-            _pen.Dispose();
-        }
-
-        private void DrawTrajectory(bool pointChecked, Color color, List<Point> pointsList)
-        {
-            if (!pointChecked) return;
-            _pen = new Pen(color);
-            Point[] pointArray = pointsList.ToArray();
-            if (Time != 0) Graphics.DrawCurve(_pen, pointArray);
+            _mechanismPainter.DrawTrajectory(_mainFormModel.PointAChecked, Color.Red, _pointsA);
+            _mechanismPainter.DrawTrajectory(_mainFormModel.PointBChecked, Color.Blue, _pointsB);
         }
 
         private Point GetTrajectoryPoint(int radius)
@@ -119,6 +83,32 @@ namespace MechanismKinematics
             return point;
         }
 
+        public void RefreshMechanism(bool clear, bool clearStable)
+        {
+            RefreshRectangle();
+            RefreshWheelOne(clearStable);
+            RefreshRotationAngle();
+            SetPointsCoordinates(byDefault: true);
+            _mechanismPainter.RefreshWheelOneShading(clear);
+            RefreshBearing();
+            RefreshBearingLines();
+            RefreshShading(clearStable);
+            RefreshWheelTwo();
+            _mechanismPainter.RefreshWheelTwoShading(clear);
+            RefreshWeightOne();
+            RefreshWeightTwo();
+        }
+
+        private void RefreshRectangle()
+        {
+            int heightIndent = 4 * RadiusOne / 5;
+            _rectangle = new Rectangle
+                (Center.X - RadiusOne,
+                 Center.Y + heightIndent,
+                 2 * RadiusOne,
+                 RadiusOne + HeightIndent - heightIndent);
+        }
+
         private void RefreshRotationAngle()
         {
             _rotationAngle = _omega * (RadiusOne + RadiusTwo) * Time / RadiusTwo;
@@ -128,41 +118,28 @@ namespace MechanismKinematics
         {
             _omega = _mainFormModel.Omega;
             SpecifyOmega();
-            SetPenColor(!clearStable);
+            _mechanismPainter.SetPenColor(!clearStable);
             _rectangle.Location = new Point(Center.X - RadiusOne, Center.Y - RadiusOne);
             _rectangle.Size = new Size(2 * RadiusOne, 2 * RadiusOne);
-            Graphics.DrawEllipse(_pen, _rectangle);
-        }
-
-        private void RefreshWheelOneShading(bool clear)
-        {
-            SetPenColor(clear);
-            _pen.DashStyle = DashStyle.DashDot;
-            Graphics.DrawLine(_pen, _shadingPointOne, _shadingPointTwo);
-            SetPointsCoordinates(byDefault: false);
-        }
-
-        private void SetPenColor(bool clear)
-        {
-            _pen.Color = clear ? Color.Black : Color.White;
+            _mechanismPainter.DrawEllipse(_rectangle);
         }
 
         private void RefreshBearing()
         {
             const int widthIndent = 4, heightIndent = 3, bearingSize = 8;
-            _pen.DashStyle = DashStyle.Solid;
+            _mechanismPainter.SetPenDashStyle(solid: true);
             _rectangle.Location = SetCenteredPoint(-widthIndent, -heightIndent);
             _rectangle.Size = new Size(bearingSize, bearingSize);
-            Graphics.DrawEllipse(_pen, _rectangle);
+            _mechanismPainter.DrawEllipse(_rectangle);
         }
 
         private void RefreshBearingLines()
         {
             const int bearingLinesWidth = 7, bearingLinesHeight = 16;
             Point point = SetCenteredPoint(-bearingLinesWidth, bearingLinesHeight);
-            Graphics.DrawLine(_pen, point, Center);
+            _mechanismPainter.DrawLine(point, Center);
             point = SetCenteredPoint(bearingLinesWidth, bearingLinesHeight);
-            Graphics.DrawLine(_pen, Center, point);
+            _mechanismPainter.DrawLine(Center, point);
         }
 
         private void RefreshShading(bool clearStable)
@@ -170,11 +147,8 @@ namespace MechanismKinematics
             const int shadingWidth = 15, shadingHeight = 16;
             _rectangle.Location = new Point(Center.X - shadingWidth, Center.Y + shadingHeight);
             _rectangle.Size = new Size(shadingWidth * 2, HeightIndent);
-            HatchBrush brush = clearStable ?
-                  new HatchBrush(HatchStyle.ForwardDiagonal, Color.White, Color.White)
-                : new HatchBrush(HatchStyle.ForwardDiagonal, Color.Black, Color.White);
-            Graphics.FillRectangle(brush, _rectangle);
-            Graphics.DrawLine(_pen,
+            _mechanismPainter.FillRectangle(clearStable, _rectangle);
+            _mechanismPainter.DrawLine(
                 Center.X + shadingWidth,
                 Center.Y + shadingHeight,
                 Center.X - shadingWidth,
@@ -185,7 +159,7 @@ namespace MechanismKinematics
         {
             const int widthIndent = 4;
             int heightIndent = RadiusOne / 5;
-            _pen.DashStyle = DashStyle.Solid;
+            _mechanismPainter.SetPenDashStyle(solid: true);
             Rectangle rectangle = new Rectangle
                 (Center.X - RadiusOne,
                  Center.Y + widthIndent * heightIndent,
@@ -195,20 +169,10 @@ namespace MechanismKinematics
                 Location = SetCenteredPoint(-RadiusTwo, -RadiusTwo),
                 Size = new Size(2 * RadiusTwo, 2 * RadiusTwo)
             };
-            Graphics.DrawEllipse(_pen, rectangle);
+            _mechanismPainter.DrawEllipse(rectangle);
         }
 
-        private void RefreshWheelTwoShading(bool clear)
-        {
-            _pen.Color = clear ? Color.Black : Color.White;
-            _pen.DashStyle = DashStyle.DashDot;
-            SetPointsCoordinates(byDefault: true);
-            Graphics.DrawLine(_pen, _shadingPointOne, _shadingPointTwo);
-            SetPointsCoordinates(byDefault: false);
-            Graphics.DrawLine(_pen, _shadingPointOne, _shadingPointTwo);
-        }
-
-        private void SetPointsCoordinates(bool byDefault)
+        public void SetPointsCoordinates(bool byDefault)
         {
             _xCircleCoordianate = -OnCircleCoordinate(byDefault, RadiusTwo);
             _yCircleCoordianate = OnCircleCoordinate(!byDefault, RadiusTwo);
@@ -247,11 +211,11 @@ namespace MechanismKinematics
 
         private void DrawWeightLine(int radius, int weightLowestPossiblePoint)
         {
-            Graphics.DrawLine(_pen,
-                   Convert.ToInt32(Center.X) + radius,
-                   Convert.ToInt32(Center.Y),
-                   Convert.ToInt32(Center.X) + radius,
-                   weightLowestPossiblePoint);
+            _mechanismPainter.DrawLine
+                (Convert.ToInt32(Center.X) + radius,
+                 Convert.ToInt32(Center.Y),
+                 Convert.ToInt32(Center.X) + radius,
+                 weightLowestPossiblePoint);
         }
 
         private int WeightLowestHeightDelta(double weightLowestHeight, double linearDistance)
@@ -274,7 +238,7 @@ namespace MechanismKinematics
             SignByBoolean(ref linearDistance, isRadiusOne, inverse: true);
             radius *= isRadiusOne ? 1 : -1;
             int weightHorizotnalDistance = Center.X + radius - 8;
-            _pen.DashStyle = DashStyle.Solid;
+            _mechanismPainter.SetPenDashStyle(solid: true);
             if (WeightLowestHeightDelta(weightLowestHeight, linearDistance) > Center.Y)
             {
                 linearDistance = Math.Abs(linearDistance);
@@ -293,7 +257,7 @@ namespace MechanismKinematics
             }
             else _rectangle.Location = new Point(weightHorizotnalDistance, Convert.ToInt32(Center.Y));
             _rectangle.Size = new Size(weightWidth, weightWidth * 2);
-            Graphics.DrawRectangle(_pen, _rectangle);
+            _mechanismPainter.DrawEllipse(_rectangle, isRectangle: true);
         }
 
         private void SetWeightParameters(int radius, int weightLowestPoint, 
