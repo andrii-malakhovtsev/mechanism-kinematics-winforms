@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MechanismKinematicsWinFormsMVP;
+using System;
 using System.Drawing;
 
 namespace MechanismKinematics
@@ -9,6 +10,7 @@ namespace MechanismKinematics
         private const int MaxOmegaValue = 100;
         public const int TimerInterval = 20;
         private readonly MechanismController _mechanismController;
+        private readonly MechanismPainter _mechanismPainter;
         private double _omega = 0.5;
         private double _time = 0;
         private int _radiusOne = 80;
@@ -16,7 +18,9 @@ namespace MechanismKinematics
 
         public MainFormModel()
         {
-            _mechanismController = new MechanismController(this);
+            _mechanismPainter = new MechanismPainter(this);
+            _mechanismController = new MechanismController(this, _mechanismPainter);
+            _mechanismPainter.MechanismController = _mechanismController;
         }
 
         public Point Center { get; private set; }
@@ -98,9 +102,9 @@ namespace MechanismKinematics
 
         public void TimerTick()
         {
-            _mechanismController.RefreshPicture(clear: false, clearStable: false);
+            _mechanismPainter.RefreshPicture(clear: false, clearStable: false);
             Time += FrameInterval;
-            _mechanismController.RefreshPicture(clear: true, clearStable: false);
+            _mechanismPainter.RefreshPicture(clear: true, clearStable: false);
             _mechanismController.CountTrajectory();
         }
 
@@ -119,7 +123,7 @@ namespace MechanismKinematics
         public void PictureBoxPaint()
         {
             if (MechanismDrawn)
-                _mechanismController.RefreshPicture(clear: true, clearStable: false);
+                _mechanismPainter.RefreshPicture(clear: true, clearStable: false);
         }
 
         public void DrawMechanismAfterFormClose()
@@ -131,7 +135,7 @@ namespace MechanismKinematics
         public void DrawMechanism()
         {
             ResetTime();
-            _mechanismController.RefreshPicture(clear: true, clearStable: false);
+            _mechanismPainter.RefreshPicture(clear: true, clearStable: false);
             SetPictureMechanismEnables(draw: true);
             MechanismDrawn = true;
             _mechanismController.ClearPointsLists();
@@ -139,8 +143,8 @@ namespace MechanismKinematics
 
         public void ClearMechanism()
         {
-            _mechanismController.RefreshPicture(clear: false, clearStable: true);
-            _mechanismController.ClearDrawing();
+            _mechanismPainter.RefreshPicture(clear: false, clearStable: true);
+            _mechanismPainter.ClearDrawing();
             SetPictureMechanismEnables(draw: false);
         }
 
@@ -161,7 +165,7 @@ namespace MechanismKinematics
 
         public void StartMechanismAnimation()
         {
-            _mechanismController.ClearDrawing();
+            _mechanismPainter.ClearDrawing();
             SetMechanismAnimationEnables(startPictureAnimation: true);
             _mechanismController.AddPointsToLists();
         }
