@@ -1,9 +1,8 @@
-﻿using MechanismKinematics;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace MechanismKinematicsWinFormsMVP
+namespace MechanismKinematics
 {
     public class MechanismPainter
     {
@@ -11,19 +10,19 @@ namespace MechanismKinematicsWinFormsMVP
         private readonly MainFormModel _mainFormModel;
         private MechanismController _mechanismController;
 
-        public MechanismPainter(MainFormModel mainFormModel)
-        {
-            _mainFormModel = mainFormModel;
-        }
+        public MechanismPainter(MainFormModel mainFormModel) => _mainFormModel = mainFormModel;
 
         public MechanismController MechanismController { set => _mechanismController = value; }
 
-        public Graphics Graphics { get => _mainFormModel.Graphics; }
+        public Graphics Graphics => _mainFormModel.Graphics;
 
         public void ClearDrawing()
         {
             using (SolidBrush solidBrush = new SolidBrush(Color.White))
-            { Graphics.FillRectangle(solidBrush, 0, 0, 0, 0); }
+            { 
+                Graphics.FillRectangle(solidBrush, 0, 0, 0, 0); 
+            }
+
             _mainFormModel.MechanismDrawn = false;
             Graphics.Clear(Color.White);
         }
@@ -36,24 +35,16 @@ namespace MechanismKinematicsWinFormsMVP
         }
 
         public void SetPenColor(bool clear)
-        {
-            _pen.Color = clear ? Color.Black : Color.White;
-        }
+            => _pen.Color = clear ? Color.Black : Color.White;
 
         public void SetPenDashStyle(bool solid)
-        {
-            _pen.DashStyle = solid ? DashStyle.Solid : DashStyle.DashDot;
-        }
+            => _pen.DashStyle = solid ? DashStyle.Solid : DashStyle.DashDot;
 
-        public void DrawLine(Point point1, Point point2)
-        {
-            Graphics.DrawLine(_pen, point1, point2);
-        }
+        public void DrawLine(Point point1, Point point2) 
+            => Graphics.DrawLine(_pen, point1, point2);
 
-        public void DrawLine(float x1, float y1, float x2, float y2)
-        {
-            Graphics.DrawLine(_pen, x1, y1, x2, y2);
-        }
+        public void DrawLine(float x1, float y1, float x2, float y2) 
+            => Graphics.DrawLine(_pen, x1, y1, x2, y2);
 
         public void DrawEllipse(Rectangle rectangle, bool isRectangle = false)
         {
@@ -70,8 +61,10 @@ namespace MechanismKinematicsWinFormsMVP
         public void DrawTrajectory(bool pointChecked, Color color, List<Point> pointsList)
         {
             if (!pointChecked) return;
+
             _pen = new Pen(color);
             Point[] pointArray = pointsList.ToArray();
+
             if (_mechanismController.Time != 0) Graphics.DrawCurve(_pen, pointArray);
         }
 

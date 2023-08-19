@@ -64,6 +64,7 @@
     <Compile Include="Models\Mechanism\MechanismController.cs" />
     <Compile Include="Models\GeometricFormModel.cs" />
     <Compile Include="Models\Mechanism\MechanismPainter.cs" />
+    <Compile Include="Models\Mechanism\WeightController.cs" />
     <Compile Include="Presenters\GeometricFormPresenter.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>

@@ -13,7 +13,7 @@ namespace MechanismKinematics
             _view.ButtonOkClick += new EventHandler<EventArgs>(OnbuttonOkClick);
         }
 
-        public double Omega { get => _model.Omega; }
+        public double Omega => _model.Omega; 
 
         private void OnbuttonOkClick(object sender, EventArgs e)
         {

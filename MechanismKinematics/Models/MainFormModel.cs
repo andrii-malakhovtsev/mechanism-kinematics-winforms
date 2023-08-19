@@ -1,5 +1,4 @@
-﻿using MechanismKinematicsWinFormsMVP;
-using System;
+﻿using System;
 using System.Drawing;
 
 namespace MechanismKinematics
@@ -25,25 +24,33 @@ namespace MechanismKinematics
 
         public Point Center { get; private set; }
 
-        public Point PictureBoxLocation { get => new Point(0, MenuStripHeight); }
+        public Point PictureBoxLocation => new Point(0, MenuStripHeight);
 
         public Graphics Graphics { get; set; } = null;
 
-        public string LabelRadiusOneText { get => GetLabelRadiusText(RadiusOne); }
+        public string LabelRadiusOneText => GetLabelRadiusText(RadiusOne);
 
-        public string LabelRadiusTwoText { get => GetLabelRadiusText(RadiusTwo); }
+        public string LabelRadiusTwoText => GetLabelRadiusText(RadiusTwo);
 
-        public string LabelOmegaText { get => Convert.ToString(Omega) + " rad/s"; }
+        public string LabelOmegaText => Convert.ToString(Omega) + " rad/s";
 
-        public int RadiusOne { get => _radiusOne; set { if (value >= 0) _radiusOne = value; } }
+        public int RadiusOne 
+        { 
+            get => _radiusOne; 
+            set => MechanismController.SetRadius(ref _radiusOne, value); 
+        }
 
-        public int RadiusTwo { get => _radiusTwo; set { if (value >= 0) _radiusTwo = value; } }
+        public int RadiusTwo 
+        { 
+            get => _radiusTwo;
+            set => MechanismController.SetRadius(ref _radiusTwo, value);
+        }
 
         public int ClientSizeHeight { private get; set; }
 
         public int PictureBoxWidth { get; set; }
 
-        public int PictureBoxHeight { get => ClientSizeHeight - MenuStripHeight - PanelHeight; }
+        public int PictureBoxHeight => ClientSizeHeight - MenuStripHeight - PanelHeight;
 
         public int PanelHeight { private get; set; }
 
@@ -59,7 +66,15 @@ namespace MechanismKinematics
             } 
         }
 
-        public double Time { get { return _time; } private set { if (value >= 0) _time = value; } }
+        public double Time
+        {
+            get => _time; 
+            private set 
+            { 
+                if (value >= 0) 
+                    _time = value; 
+            }
+        }
 
         public bool MechanismDrawn { get; set; } = false;
 
@@ -85,20 +100,13 @@ namespace MechanismKinematics
 
         public bool PointBChecked { get; set; }
 
-        private string GetLabelRadiusText(int radius)
-        {
-            return Convert.ToString(radius) + " inches";
-        }
+        private string GetLabelRadiusText(int radius) 
+            => Convert.ToString(radius) + " inches";
 
-        public void SetCenterCooridnates()
-        {
-            Center = new Point(PictureBoxWidth / 2, PictureBoxHeight / 2);
-        }
+        public void SetCenterCooridnates() 
+            => Center = new Point(PictureBoxWidth / 2, PictureBoxHeight / 2);
 
-        public void ResetTime()
-        {
-            Time = 0;
-        }
+        public void ResetTime() => Time = 0;
 
         public void TimerTick()
         {
@@ -158,10 +166,8 @@ namespace MechanismKinematics
             PointBEnabled = draw;
         }
 
-        public void StopMechanismAnimation()
-        {
-            SetMechanismAnimationEnables(startPictureAnimation: false);
-        }
+        public void StopMechanismAnimation() 
+            => SetMechanismAnimationEnables(startPictureAnimation: false);
 
         public void StartMechanismAnimation()
         {
