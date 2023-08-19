@@ -5,10 +5,7 @@ namespace MechanismKinematics
 {
     public partial class GeometricForm : Form, IGeometricFormView
     {
-        public GeometricForm()
-        {
-            InitializeComponent();
-        }
+        public GeometricForm() => InitializeComponent();
 
         #region Interface implementation
 

@@ -27,19 +27,15 @@ namespace MechanismKinematics
             SetView();
         }
 
-        public int RadiusOne { get => _model.RadiusOne; }
+        public int RadiusOne => _model.RadiusOne;
 
-        public int RadiusTwo { get => _model.RadiusTwo; }
+        public int RadiusTwo => _model.RadiusTwo;
 
-        private void OnKinematicFormOpen(object sender, EventArgs e)
-        {
-            OnFormOpen(MakeNewKinematicForm);
-        }
+        private void OnKinematicFormOpen(object sender, EventArgs e) 
+            => OnFormOpen(MakeNewKinematicForm);
 
         private void OnGeometricFormOpen(object sender, EventArgs e)
-        {
-            OnFormOpen(MakeNewGeometricForm);
-        }
+            => OnFormOpen(MakeNewGeometricForm);
 
         private void OnFormOpen(EventHandler<EventArgs> @event)
         {
@@ -62,10 +58,8 @@ namespace MechanismKinematics
             _view.PointBChecked = _model.PointBChecked;
         }
 
-        private void OnPictureBoxPaint(object sender, EventArgs e)
-        {
-            _model.PictureBoxPaint();
-        }
+        private void OnPictureBoxPaint(object sender, EventArgs e) 
+            => _model.PictureBoxPaint();
 
         private void OnClearMechanism(object sender, EventArgs e)
         {
@@ -95,10 +89,8 @@ namespace MechanismKinematics
             _model.TimerTick();
         }
 
-        private void OnGraphicsSetup(object sender, EventArgs e)
-        {
-            _model.Graphics = _view.Graphics;
-        }
+        private void OnGraphicsSetup(object sender, EventArgs e) 
+            => _model.Graphics = _view.Graphics;
 
         private void OnDrawMechanism(object sender, EventArgs e)
         {

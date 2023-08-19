@@ -14,6 +14,7 @@ namespace MechanismKinematics
                 try
                 {
                     const int afterNumberSymbolsCount = 6;
+
                     return OmegaFullString != null ? Convert.ToDouble(OmegaFullString.Remove
                         (OmegaFullString.Length - afterNumberSymbolsCount, afterNumberSymbolsCount)
                         .Replace(",", ".")) : defaultSpeed;

@@ -5,10 +5,7 @@ namespace MechanismKinematics
 {
     public partial class KinematicForm : Form, IKinematicFormView
     {
-        public KinematicForm()
-        {
-            InitializeComponent();
-        }
+        public KinematicForm() => InitializeComponent();
 
         #region Interface implementation
 
