@@ -18,11 +18,11 @@ namespace MechanismKinematics
         {
             var geometricForm = new GeometricForm();
             var geometricFormPresenter = new GeometricFormPresenter(geometricForm);
-            geometricFormPresenter.SetParameters(_mainFormPresenter.RadiusOne, 
-                _mainFormPresenter.RadiusTwo);
+
+            geometricFormPresenter.SetParameters(_mainFormPresenter.RadiusOne, _mainFormPresenter.RadiusTwo);
             geometricForm.ShowDialog();
-            _mainFormPresenter.SetRadiuses(geometricFormPresenter.RadiusOne,
-                geometricFormPresenter.RadiusTwo);
+
+            _mainFormPresenter.SetRadiuses(geometricFormPresenter.RadiusOne, geometricFormPresenter.RadiusTwo);
             _mainFormPresenter.SetRadiusesText(geometricFormPresenter.LabelRadiusOneText, 
                 geometricFormPresenter.LabelRadiusTwoText);
         }
@@ -32,6 +32,7 @@ namespace MechanismKinematics
             var kinematicForm = new KinematicForm();
             var kinematicFormPresenter = new KinematicFormPresenter(kinematicForm);
             kinematicForm.ShowDialog();
+
             _mainFormPresenter.SetOmega(kinematicFormPresenter.Omega);
         }
     }

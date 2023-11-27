@@ -81,16 +81,17 @@ namespace MechanismKinematics
             SetPenColor(clear);
             _pen.DashStyle = DashStyle.DashDot;
             Graphics.DrawLine(_pen, _mechanismController.ShadingPointOne, _mechanismController.ShadingPointTwo);
-            _mechanismController.SetPointsCoordinates(byDefault: false);
+            _mechanismController.SetPointsCoordinates(xAxis: false);
         }
 
         public void RefreshWheelTwoShading(bool clear)
         {
             SetPenColor(clear);
             SetPenDashStyle(solid: false);
-            _mechanismController.SetPointsCoordinates(byDefault: true);
+            _mechanismController.SetPointsCoordinates(xAxis: true);
+
             DrawLine(_mechanismController.ShadingPointOne, _mechanismController.ShadingPointTwo);
-            _mechanismController.SetPointsCoordinates(byDefault: false);
+            _mechanismController.SetPointsCoordinates(xAxis: false);
             DrawLine(_mechanismController.ShadingPointOne, _mechanismController.ShadingPointTwo);
         }
     }

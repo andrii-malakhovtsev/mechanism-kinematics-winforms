@@ -64,7 +64,9 @@ namespace MechanismKinematics
         private void OnClearMechanism(object sender, EventArgs e)
         {
             _model.ClearMechanism();
+
             RefreshView();
+
             _view.DrawToolStripEnabled = _model.DrawToolStripEnabled;
             _view.PointAEnabled = _model.PointAEnabled;
             _view.PointBEnabled = _model.PointBEnabled;
@@ -96,8 +98,10 @@ namespace MechanismKinematics
         {
             _model.ResetTime();
             _view.Time = _model.Time;
+
             _model.DrawMechanism();
             RefreshView();
+
             _view.DrawToolStripEnabled = _model.DrawToolStripEnabled;
             _view.Drawn = _model.MechanismDrawn;
             _view.PointAEnabled = _model.PointAEnabled;
@@ -116,7 +120,9 @@ namespace MechanismKinematics
             _view.PictureBoxWidth = _model.PictureBoxWidth;
             _model.SetCenterCooridnates();
             _model.Graphics = _view.Graphics;
+
             RefreshView();
+
             _view.LabelRadiusOneText = _model.LabelRadiusOneText;
             _view.LabelRadiusTwoText = _model.LabelRadiusTwoText;
             _view.LabelOmegaText = _model.LabelOmegaText;

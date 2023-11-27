@@ -77,9 +77,11 @@ namespace MechanismKinematics
         private Point GetTrajectoryPoint(int radius)
         {
             var point = new Point();
-            _xCircleCoordianate = OnCircleCoordinate(xAxis: true, radius);
-            _yCircleCoordianate = OnCircleCoordinate(xAxis: false, radius);
+
+            _xCircleCoordianate = GetOnCircleCoordinate(xAxis: true, radius);
+            _yCircleCoordianate = GetOnCircleCoordinate(xAxis: false, radius);
             SetPointCoordinates(ref point);
+
             return point;
         }
 
@@ -88,13 +90,15 @@ namespace MechanismKinematics
             RefreshRectangle();
             RefreshWheelOne(clearStable);
             RefreshRotationAngle();
-            SetPointsCoordinates(byDefault: true);
+            SetPointsCoordinates(xAxis: true);
             _mechanismPainter.RefreshWheelOneShading(clear);
+
             RefreshBearing();
             RefreshBearingLines();
             RefreshShading(clearStable);
             RefreshWheelTwo();
             _mechanismPainter.RefreshWheelTwoShading(clear);
+
             var weightController = new WeightController(_mainFormModel, _mechanismPainter, _rectangle);
             weightController.RefreshWeightOne(_omega);
             weightController.RefreshWeightTwo(_omega);
@@ -151,6 +155,7 @@ namespace MechanismKinematics
 
             _rectangle.Location = new Point(Center.X - shadingWidth, Center.Y + shadingHeight);
             _rectangle.Size = new Size(shadingWidth * 2, HeightIndent);
+
             _mechanismPainter.FillRectangle(clearStable, _rectangle);
             _mechanismPainter.DrawLine(
                 Center.X + shadingWidth,
@@ -178,13 +183,16 @@ namespace MechanismKinematics
             _mechanismPainter.DrawEllipse(rectangle);
         }
 
-        public void SetPointsCoordinates(bool byDefault)
+        public void SetPointsCoordinates(bool xAxis)
         {
-            _xCircleCoordianate = -OnCircleCoordinate(byDefault, RadiusTwo);
-            _yCircleCoordianate = OnCircleCoordinate(!byDefault, RadiusTwo);
-            SignByBoolean(ref _yCircleCoordianate, byDefault, inverse: true);
+            _xCircleCoordianate = -GetOnCircleCoordinate(xAxis, RadiusTwo);
+            _yCircleCoordianate = GetOnCircleCoordinate(!xAxis, RadiusTwo);
+            SignByBoolean(ref _yCircleCoordianate, xAxis, inverse: true);
+
             SetPointCoordinates(ref _shadingPointOne);
+
             _xCircleCoordianate *= -1; _yCircleCoordianate *= -1;
+
             SetPointCoordinates(ref _shadingPointTwo);
         }
 
@@ -197,7 +205,7 @@ namespace MechanismKinematics
         private Point SetCenteredPoint(int xOffset, int yOffset) 
             => new Point(Center.X + xOffset, Center.Y + yOffset);
 
-        private double OnCircleCoordinate(bool xAxis, int radius)
+        private double GetOnCircleCoordinate(bool xAxis, int radius)
         {
             double axisCoordinate = xAxis ? Math.Sin(_rotationAngle) : Math.Cos(_rotationAngle);
             return axisCoordinate * radius;
