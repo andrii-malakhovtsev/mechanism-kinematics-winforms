@@ -38,7 +38,7 @@ namespace MechanismKinematics
         { 
             get => _radiusOne; 
             set => MechanismController.SetRadius(ref _radiusOne, value); 
-        }
+        } // radius to another class
 
         public int RadiusTwo 
         { 

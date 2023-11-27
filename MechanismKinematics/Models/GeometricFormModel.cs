@@ -21,7 +21,9 @@ namespace MechanismKinematics
 
         public string LabelRadiusOneText => GetLabelRadiusText(RadiusOne);
 
-        public string LabelRadiusTwoText  => GetLabelRadiusText(RadiusTwo);
+        public string LabelRadiusTwoText => GetLabelRadiusText(RadiusTwo); 
+        //mb can get radius into separate class having fields like
+        // string Radius.LabelText
 
         private string GetLabelRadiusText(int radius) => Convert.ToString(radius) + " inches";
     }
