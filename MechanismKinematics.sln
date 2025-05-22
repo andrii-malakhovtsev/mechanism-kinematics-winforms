@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MechanismKinematics", "MechanismKinematics\MechanismKinematics.csproj", "{7241FA88-CDFA-46AA-8330-BD78B64BDB89}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MechanismKinematics.Core", "MechanismKinematics.Core\MechanismKinematics.Core.csproj", "{4D9BE512-869C-4106-911D-ADCDB47FF111}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7241FA88-CDFA-46AA-8330-BD78B64BDB89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7241FA88-CDFA-46AA-8330-BD78B64BDB89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7241FA88-CDFA-46AA-8330-BD78B64BDB89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D9BE512-869C-4106-911D-ADCDB47FF111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D9BE512-869C-4106-911D-ADCDB47FF111}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D9BE512-869C-4106-911D-ADCDB47FF111}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D9BE512-869C-4106-911D-ADCDB47FF111}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

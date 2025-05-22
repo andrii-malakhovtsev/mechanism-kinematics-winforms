@@ -2,6 +2,8 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <LangVersion>10.0</LangVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{7241FA88-CDFA-46AA-8330-BD78B64BDB89}</ProjectGuid>
@@ -48,6 +50,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="System.Drawing.Common">
+      <Version>5.0.3</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -61,37 +68,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Mechanism\MechanismController.cs" />
-    <Compile Include="Models\GeometricFormModel.cs" />
-    <Compile Include="Models\Mechanism\MechanismPainter.cs" />
-    <Compile Include="Models\Mechanism\WeightController.cs" />
-    <Compile Include="Presenters\GeometricFormPresenter.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\IMainFormView.cs" />
-    <Compile Include="Models\MainFormModel.cs" />
-    <Compile Include="Presenters\MainFormPresenter.cs" />
     <Compile Include="Forms\GeometricForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\GeometricForm.Designer.cs">
       <DependentUpon>GeometricForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\IGeometricFormView.cs" />
     <Compile Include="Forms\KinematicForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\KinematicForm.Designer.cs">
       <DependentUpon>KinematicForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\IKinematicFormView.cs" />
-    <Compile Include="Models\KinematicFormModel.cs" />
-    <Compile Include="Presenters\KinematicFormPresenter.cs" />
-    <Compile Include="Presenters\MainInteractions.cs" />
+    <Compile Include="MainInteractions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\MainForm.resx">
@@ -137,6 +132,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MechanismKinematics.Core\MechanismKinematics.Core.csproj">
+      <Project>{4d9be512-869c-4106-911d-adcdb47ff111}</Project>
+      <Name>MechanismKinematics.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
