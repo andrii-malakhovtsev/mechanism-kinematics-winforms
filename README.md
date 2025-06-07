@@ -8,8 +8,8 @@ code logic is located in the model classes. </br></br>
 <img src="https://user-images.githubusercontent.com/111363234/205174622-c8bfb77d-b85c-4852-bfe1-f865637eaf41.png" width="400" height="400" /> 
 
 ## Installation
-Go to <a href="https://github.com/malandrii/mechanism-kinematics-winforms-mvp/releases">Releases</a>, choose the latest release and click the `mechanism-kinematics.exe` or
-just click <a href="https://github.com/malandrii/mechanism-kinematics-winforms-mvp/releases/download/v1.2/mechanism-kinematics.exe">here</a>.
+Go to <a href="https://github.com/andrii-malakhovtsev/mechanism-kinematics-winforms-mvp/releases">Releases</a>, choose the latest release and click the `mechanism-kinematics.exe` or
+just click <a href="https://github.com/andrii-malakhovtsev/mechanism-kinematics-winforms-mvp/releases/download/v1.2/mechanism-kinematics.exe">here</a>.
 
 ## Usage </br>
 ### 1. Draw the mechanism
